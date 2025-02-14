@@ -73,365 +73,190 @@ const authenticate = async (req: any, res: any, next: any) => {
 //                              ROTAS
 //
 
-//           ROTA CADASTRO DE USUÁRIO
-routes.post('/register', async (req, res) => {
-    const { login, email, password } = req.body;
+// //           ROTA PERFIL DE USUÁRIO
+// routes.get('/profile', authenticate, async (req: any, res: any) => {
+//     const userId = req.user.id;
 
-    const existingUser = await prisma.user.findUnique({
-        where: {
-            login
-        }
-    });
-    if (existingUser) {
-        return res.status(400).json({
-            status: 'error',
-            message: 'Usuário já existe',
-            data: null    
-        });
-    }
+//     try {
+//         const user = await prisma.user.findUnique({
+//             where: { id: userId },
+//             select: {
+//                 id: true,
+//                 login: true,
+//                 email: true,
+//                 password: true,
+//                 experience: true,
+//                 profileImage: true,
+//                 questions_answered: true,
+//                 correct_answers: true,
+//                 wrong_answers: true,
+//             }
+//         });
 
-    const existingEmail = await prisma.user.findUnique({
-        where: {
-            email
-        }
-    });
-    if (existingEmail) {
-        return res.status(400).json({
-            status: 'error',
-            message: 'Email já existe',
-            data: null    
-        });
-    }
+//         if (!user) {
+//             return res.status(404).json({
+//                 status: 'error',
+//                 message: 'Usuário não encontrado',
+//                 data: null
+//             });
+//         }
+//         res.status(200).json({
+//             status: 'success',
+//             data: user
+//         });
+//     } catch (error) {
+//         res.status(500).json({
+//             status: 'error',
+//             message: 'Erro ao buscar dados do usuário',
+//             data: null
+//         });
+//     }
+// });
 
-    if (!login || !email || !password) {
-        return res.status(400).json({
-            status: 'error',
-            message: 'Preencha todos os campos',
-            data: null
-        });
-    }
-
-    console.log(password.length);
-    if (password.length < 6) {
-        console.log('entrou aqui')
-        return res.status(400).json({
-            status: 'error',
-            message: 'Senha deve ter no mínimo 6 caracteres',
-            data: null
-        });
-    }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    const user = await prisma.user.create({
-        data: {
-            login,
-            email,
-            password: hashedPassword,
-        }
-    });
-
-    const token = createToken(user);
-    res.cookie('auth_token', token, { httpOnly: true, secure: true, sameSite: 'strict', maxAge: 3600000 });
-
-    return res.status(201).json({
-        status: 'success',
-        message: 'Usuário criado com sucesso',
-        data: user
-    });
-});
-
-
-//           ROTA LOGIN DE USUÁRIO
-routes.post('/login', async (req, res) => {
-    const { login, password } = req.body;
-    if (!login || !password) {
-        return res.status(400).json({
-            status: 'error',
-            message: 'Preencha todos os campos',
-            data: null
-        });
-    }
-
-    const user = await prisma.user.findUnique({
-        where: {
-            login
-        }
-    });
-    if (!user) {
-        return res.status(400).json({
-            status: 'error',
-            message: 'Usuário não encontrado',
-            data: null
-        });
-    }
-    const isPasswordCorrect = await bcrypt.compare(password, user.password);
-    if (!isPasswordCorrect) {
-        return res.status(400).json({
-            status: 'error',
-            message: 'Senha incorreta',
-            data: null
-        });
-    }
+// routes.post('/loadQuestions', authenticate, async (req: any, res: any) => {
+//     let aleatorio = false;
+//     let { ano, tipo } = req.body;
+//     const filePath = path.join(__dirname, '..', '..', 'assets', 'json', 'arrayPerguntas.json');
     
-    if (req.cookies.auth_token) {
-        return res.status(400).json({
-            status: 'error',
-            message: 'Você já está logado',
-            data: null
-        });
-    }
+//     fs.readFile(filePath, 'utf-8', (err: NodeJS.ErrnoException | null, data: string) => {
+//         if (err) {
+//             console.error('Error reading file:', err);
+//             return res.status(500).json({ error: 'Failed to load questions' });
+//         }
 
-    const token = createToken(user);
-    res.cookie('auth_token', token, { httpOnly: true, secure: true, sameSite: 'strict', maxAge: 3600000 });
-
-    return res.status(200).json({
-        status: 'success',
-        message: 'Login realizado com sucesso',
-        data: null
-    });
-});
-
-
-//           ROTA PERFIL DE USUÁRIO
-routes.get('/profile', authenticate, async (req: any, res: any) => {
-    const userId = req.user.id;
-
-    try {
-        const user = await prisma.user.findUnique({
-            where: { id: userId },
-            select: {
-                id: true,
-                login: true,
-                email: true,
-                password: true,
-                experience: true,
-                profileImage: true,
-                questions_answered: true,
-                correct_answers: true,
-                wrong_answers: true,
-            }
-        });
-
-        if (!user) {
-            return res.status(404).json({
-                status: 'error',
-                message: 'Usuário não encontrado',
-                data: null
-            });
-        }
-        res.status(200).json({
-            status: 'success',
-            data: user
-        });
-    } catch (error) {
-        res.status(500).json({
-            status: 'error',
-            message: 'Erro ao buscar dados do usuário',
-            data: null
-        });
-    }
-});
-
-routes.post('/loadQuestions', authenticate, async (req: any, res: any) => {
-    let aleatorio = false;
-    let { ano, tipo } = req.body;
-    const filePath = path.join(__dirname, '..', '..', 'assets', 'json', 'arrayPerguntas.json');
-    
-    fs.readFile(filePath, 'utf-8', (err: NodeJS.ErrnoException | null, data: string) => {
-        if (err) {
-            console.error('Error reading file:', err);
-            return res.status(500).json({ error: 'Failed to load questions' });
-        }
-
-        console.log(ano, tipo);
-        if (tipo.indexOf('aleatorio') !== -1) {
-            aleatorio = true;
-            tipo = tipo.filter((t: string) => t !== 'aleatorio');
-        }
+//         console.log(ano, tipo);
+//         if (tipo.indexOf('aleatorio') !== -1) {
+//             aleatorio = true;
+//             tipo = tipo.filter((t: string) => t !== 'aleatorio');
+//         }
         
-        const questions = JSON.parse(data);
+//         const questions = JSON.parse(data);
 
-        let filteredQuestions: any[] = [];
-        for (let i = 0; i < tipo.length; i++) {
-            filteredQuestions = filteredQuestions.concat(...Object.values(questions[ano][tipo[i]]));
-        }
+//         let filteredQuestions: any[] = [];
+//         for (let i = 0; i < tipo.length; i++) {
+//             filteredQuestions = filteredQuestions.concat(...Object.values(questions[ano][tipo[i]]));
+//         }
 
-        let questionList = Object.values(filteredQuestions).flat(); //parei aqui
-        console.log(questionList);
-        if (aleatorio) {
-            questionList.sort(() => Math.random() - 0.5);
-        }     
+//         let questionList = Object.values(filteredQuestions).flat(); //parei aqui
+//         console.log(questionList);
+//         if (aleatorio) {
+//             questionList.sort(() => Math.random() - 0.5);
+//         }     
 
-        res.status(200);
-        res.json({ questionList });
-    });
-});
+//         res.status(200);
+//         res.json({ questionList });
+//     });
+// });
 
-routes.post('/checkAnswers', authenticate, async (req:any, res:any) => {
-    const { respostasDoUsuario, perguntas } = req.body;
-    const userId = req.user.id;
-    let acertos = 0;
-    let erros = 0;
-    let respondidas = 0;
-    for (let i = 0; i < perguntas.length; i++) {
-        console.log(respostasDoUsuario[i], perguntas[i].Resposta);
-        if (respostasDoUsuario[i] === perguntas[i].Resposta && respostasDoUsuario[i] !== undefined) {
-            respondidas++;
-            acertos++;
-        }
-        else {
-            respondidas++;
-            erros++;
-        }
-    }
-    const user = await prisma.user.findUnique({
-        where: { id: userId },
-    });
+// routes.get('/loginVerify', authenticate, async (req: any, res: any) => {
+//     if (req.cookies.auth_token) {
+//         const userId = req.user.id;
+//         const login = await prisma.user.findUnique({
+//             where: {id: userId },
+//             select: {
+//                 login: true
+//             }
+//         });
+//         return res.status(200).json({
+//             status: 'success',
+//             message: ' está logado',
+//             data: login?.login.toString()
+//         });
+//     }
+//     return res.status(400).json({
+//         status: 'error',
+//         message: 'Você não está logado',
+//         data: null
+//     });
+// });
+
+// //           ROTA MODIFICAR USUÁRIO, SENHA OU EMAIL
+// //não fiz pra imagem
+// routes.put('/modify', authenticate, async (req: any, res: any) => {
+//     const userId = req.user.id;
+//     const { field, value } = req.body;
+
+//     if (!field || !value) {
+//         return res.status(400).json({
+//             status: 'error',
+//             message: 'Preencha todos os campos',
+//             data: null
+//         });
+//     }
     
-    if (user){
-        user.correct_answers += acertos;
-        user.wrong_answers += erros;
-        user.questions_answered += respondidas;
-        user.experience += acertos * 10;
-   
-        await prisma.user.update({
-            where: { id: userId },
-            data: user,
-        });
-    }
-    res.status(200);
-});
-
-routes.get('/getUsers', async (req: any, res: any) => {
-    try {
-        const users = await prisma.user.findMany({
-            select: {
-                id: true,
-                login: true,
-                experience: true,
-                questions_answered: true,
-                correct_answers: true,
-                wrong_answers: true,
-                profileImage: true
-            }
-        });
-        res.status(200).json({ users });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-});
-
-routes.get('/loginVerify', authenticate, async (req: any, res: any) => {
-    if (req.cookies.auth_token) {
-        const userId = req.user.id;
-        const login = await prisma.user.findUnique({
-            where: {id: userId },
-            select: {
-                login: true
-            }
-        });
-        return res.status(200).json({
-            status: 'success',
-            message: ' está logado',
-            data: login?.login.toString()
-        });
-    }
-    return res.status(400).json({
-        status: 'error',
-        message: 'Você não está logado',
-        data: null
-    });
-});
-
-//           ROTA MODIFICAR USUÁRIO, SENHA OU EMAIL
-//não fiz pra imagem
-routes.put('/modify', authenticate, async (req: any, res: any) => {
-    const userId = req.user.id;
-    const { field, value } = req.body;
-
-    if (!field || !value) {
-        return res.status(400).json({
-            status: 'error',
-            message: 'Preencha todos os campos',
-            data: null
-        });
-    }
+//     if (field == 'password') {
+//         if (value.length < 6) {
+//             return res.status(400).json({
+//                 status: 'error',
+//                 message: 'Senha deve ter no mínimo 6 caracteres',
+//                 data: null
+//             });
+//         }
+//         const hashedPassword = await bcrypt.hash(value, 10);
+//         await prisma.user.update({
+//             where: { id: userId },
+//             data: { password: hashedPassword }
+//         });
+//         return res.status(200).json({
+//             status: 'success',
+//             message: 'Senha modificada com sucesso',
+//             data: null
+//         });
+//     } else if (field == 'email') {
+//         await prisma.user.update({
+//             where: { id: userId },
+//             data: { email: value }
+//         });
+//         return res.status(200).json({
+//             status: 'success',
+//             message: 'Email modificada com sucesso',
+//             data: null
+//         });
+//     } else if (field == 'login') {
+//         await prisma.user.update({
+//             where: { id: userId },
+//             data: { login: value }
+//         });
+//         return res.status(200).json({
+//             status: 'success',
+//             message: 'Login modificada com sucesso',
+//             data: null
+//         });
+//     } else if (field == 'profileImage') {
+//         await prisma.user.update({
+//             where: { id: userId },
+//             data: { profileImage: value }
+//         });
+//         return res.status(200).json({
+//             status: 'success',
+//             message: 'Imagem de perfil modificada com sucesso',
+//             data: null
+//         });
+//     } else {
+//         return res.status(400).json({
+//             status: 'error',
+//             message: 'Campo inválido',
+//             data: null
+//         });
+//     }
     
-    if (field == 'password') {
-        if (value.length < 6) {
-            return res.status(400).json({
-                status: 'error',
-                message: 'Senha deve ter no mínimo 6 caracteres',
-                data: null
-            });
-        }
-        const hashedPassword = await bcrypt.hash(value, 10);
-        await prisma.user.update({
-            where: { id: userId },
-            data: { password: hashedPassword }
-        });
-        return res.status(200).json({
-            status: 'success',
-            message: 'Senha modificada com sucesso',
-            data: null
-        });
-    } else if (field == 'email') {
-        await prisma.user.update({
-            where: { id: userId },
-            data: { email: value }
-        });
-        return res.status(200).json({
-            status: 'success',
-            message: 'Email modificada com sucesso',
-            data: null
-        });
-    } else if (field == 'login') {
-        await prisma.user.update({
-            where: { id: userId },
-            data: { login: value }
-        });
-        return res.status(200).json({
-            status: 'success',
-            message: 'Login modificada com sucesso',
-            data: null
-        });
-    } else if (field == 'profileImage') {
-        await prisma.user.update({
-            where: { id: userId },
-            data: { profileImage: value }
-        });
-        return res.status(200).json({
-            status: 'success',
-            message: 'Imagem de perfil modificada com sucesso',
-            data: null
-        });
-    } else {
-        return res.status(400).json({
-            status: 'error',
-            message: 'Campo inválido',
-            data: null
-        });
-    }
-    
-});
+// });
 
-//           ROTA LOGOUT DE USUÁRIO
-routes.post('/logout', (req, res) => {
-    if (!req.cookies.auth_token) {
-        return res.status(400).json({
-            status: 'error',
-            message: 'Você não está logado',
-            data: null
-        });
-    }
-    res.clearCookie('auth_token');
-    res.status(200).json({
-        status: 'success',
-        message: 'Logout realizado com sucesso',
-        data: null
-    });
-});
+// //           ROTA LOGOUT DE USUÁRIO
+// routes.post('/logout', (req, res) => {
+//     if (!req.cookies.auth_token) {
+//         return res.status(400).json({
+//             status: 'error',
+//             message: 'Você não está logado',
+//             data: null
+//         });
+//     }
+//     res.clearCookie('auth_token');
+//     res.status(200).json({
+//         status: 'success',
+//         message: 'Logout realizado com sucesso',
+//         data: null
+//     });
+// });
 
 export default routes;
