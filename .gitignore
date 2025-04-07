@@ -1,3 +1,4 @@
 node_modules
+script.cjs
 # Keep environment variables out of version control
 
