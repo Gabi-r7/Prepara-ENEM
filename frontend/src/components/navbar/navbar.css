@@ -1,0 +1,47 @@
+nav {
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 1em;
+    width: var(--nav-width);
+    height: 100dvh;/* Garante que a altura do nav seja igual à altura da janela */
+}
+
+nav > div {
+    display: flex;
+    flex-direction: column;
+    justify-content:space-around;
+    align-items: center;
+    gap: 1rem;
+    height: 100%;
+}
+
+#logo {
+    padding: 1em;
+}
+
+#logo img {
+    width: 100%;
+}
+
+#links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+#links div {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+#links div > a{
+    text-decoration: none;
+    color: rgb(219, 229, 237);
+    font-size: 1.8rem;
+    font-family: "Titillium Web", sans-serif;
+    font-weight: 650;
+    font-style: normal;
+}
