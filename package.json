@@ -5,7 +5,7 @@
     "mime-types": "^3.0.1"
   },
   "scripts": {
-    "start": "node script.cjs"
+    "start": "node script.mjs"
   },
-  "type": "commonjs"
+  "type": "module"
 }

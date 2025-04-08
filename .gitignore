@@ -1,4 +1,3 @@
 node_modules
-script.cjs
+apiKey.js
 # Keep environment variables out of version control
-
