@@ -151,7 +151,7 @@ async function uploadLocalPDF(filePath, displayName) {
 async function main() {
     try {
         const content = [
-             { text: "Use o seguinte contexto para corrigir o texto abaixo de acordo com as competências do ENEM:" }
+             { text: "Use o seguinte contexto para avaliar o texto abaixo de acordo com as competências do ENEM:" }
         ];
 
         // Seus caminhos locais (verifique se estão corretos)
@@ -188,12 +188,15 @@ async function main() {
         Vale ressaltar, ainda, a negligência do Estado, que fiscaliza de forma ineficiente as formas de trabalho no território nacional. Embora inúmeras leis trabalhistas tenham sido criadas e implementadas desde o governo de Getúlio Vargas, os relatos de trabalhos precarizados no Brasil ainda são muito comuns. Deste modo, soluções podem ser tomadas utilizando-se das tecnologias presentes no cotidiano da população para que seja possível o crescimento econômico no país, lutando contra a precarização das condições de trabalho.
         Portanto, é necessário que medidas sejam tomadas com o intuito de coibir o problema discorrido. Ao Estado, caberia a ampliação de programas de emprego visando diminuir a taxa de desemprego no Brasil e ainda facilitando aos indivíduos de diversos meios econômicos o acesso ao mercado de trabalho. Além disso, é necessário que este processo seja feito junto à medidas de regulamentação das condições de trabalho, visando coibir a precarização destas. Desta forma, será possível promover o crescimento econômico e a diminuição da precarização das condições de trabalho no país.`; // Coloque seu texto aqui
 
-        content.push({ text: `Agora, dê notas para o seguinte texto:\n${text}` });
+        content.push({ text: `Agora, dê notas ao seguinte texto de acordo com as competências do ENEM apresentadas nos arquivos acima:\n${text}` });
 
         console.log("Generating content with Gemini...");
-        const model = ai.getGenerativeModel({ model: "gemini-1.5-flash" });
+        
         const requestPayload = [{ role: "user", parts: content }];
-        const result = await model.generateContent({ contents: requestPayload });
+        const result = await ai.models.generateContent({ 
+            model: "gemini-1.5-flash",
+            contents: requestPayload 
+        });
         const response = result.response;
 
         console.log("\n--- Resposta da IA ---");
