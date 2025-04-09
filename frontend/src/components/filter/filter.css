@@ -1,0 +1,27 @@
+.filter-container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 2rem;
+    padding: 1rem;
+    grid-auto-flow: column;
+}
+
+.filter-label{
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.filter-item{
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+select{
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    background-color: #192633;
+}

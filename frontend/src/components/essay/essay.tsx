@@ -1,10 +1,10 @@
-import './home.css';
+import './essay.css';
 import Tittle from '../tittle/tittle';
 
-function Home() {
+function Essay() {
     return (
         <>
-            <Tittle page="Home"/>
+            <Tittle page="Essay"/>
             <div>
                 asdasdasdasdadasdasd
             </div>
@@ -12,4 +12,4 @@ function Home() {
       );
 }
 
-export default Home;
+export default Essay;''

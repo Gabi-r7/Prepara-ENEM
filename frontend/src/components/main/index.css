@@ -16,6 +16,10 @@
   --background-color: #21303e;
   --windows-color: #f9f9f9;
   --nav-width: 16rem;
+  --color-filter: #f5f5f5;
+  --color-essay: #38b6ff;
+  --color-ranking: #f1c40f;
+  --color-home: rgb(166, 0, 255);
 
   .material-symbols-outlined {
     font-variation-settings:
@@ -40,20 +44,30 @@ body *{
   box-sizing: border-box;
 }
 
-.content {
+.app-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  left: var(--nav-width);
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden; 
 }
 
-/* #root{
-  position: relative;
-  min-height: 100vh;
-  width: 100vw;
-} */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+}
+
+.main-content {
+  margin-left: var(--nav-width);
+  flex: 1;
+  overflow-y: auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 1rem;
+}
 
 .window {
   background-color: var(--window-border-color);

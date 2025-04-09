@@ -1,0 +1,29 @@
+.tittle-Filter{
+    background-color: var(--color-filter);
+}
+.tittle-Essay{
+    background-color: var(--color-essay);
+}
+.tittle-Ranking{
+    background-color: var(--color-ranking);
+}
+.tittle-Home{
+    background-color: var(--color-home);
+}
+
+.tittle{
+    color: black;
+    border-radius: 20px;
+    width: 100%;
+}
+
+h1{
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    padding: 1rem;
+    margin: 0;
+    gap: 1rem;
+    display: flex; 
+    align-items: center;
+}

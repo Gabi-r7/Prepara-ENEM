@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './login.css';
 import url from '../../url';
+import Tittle from '../tittle/tittle';
 
 function Login() {
     const [email, setEmail] = useState('');
@@ -33,8 +34,9 @@ function Login() {
     };
 
     return (
+      <>
+        <Tittle page="Login"/>
         <div className="login-container">
-          <h1>Login</h1>
           <form onSubmit={handleLogin}>
             <div className="form-group">
               <label htmlFor="email">Email:</label>
@@ -59,6 +61,7 @@ function Login() {
             <button type="submit">Login</button>
           </form>
         </div>
+      </>
       );
 }
 

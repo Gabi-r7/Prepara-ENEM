@@ -1,11 +1,6 @@
-// import { useState } from 'react'
-import {BrowserRouter as Router, Route, Routes, Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import './Navbar.css'
-import Login from '../login/login'
-import Home from '../home/home'
-import Filter from '../filter/filter'
-import Ranking from '../ranking/ranking'
-import Redaction from '../redaction/redaction'
+import icons from '../utils/icons';
 
 function Navbar() {
 
@@ -15,61 +10,33 @@ function Navbar() {
     alt: 'logo do site, um post-it escrito "Prepara ENEM"'
   }
 
+  const navItems = [
+    { path: '/', text: 'Inicio', icon: icons.Home , id: 'home'},
+    { path: '/ranking', text: 'Ranking', icon: icons.Ranking , id: 'ranking'},
+    { path: '/filter', text: 'Questões', icon: icons.Filter , id: 'questions'},
+    { path: '/essay', text: 'Redações', icon: icons.Essay , id: 'essay'},
+    { path: '/login', text: 'Login', icon: icons.Login , id: 'login'},
+  ];
+
   return (
     <>
-      <Router>
-        <nav>
-          <div className="window">
-            <div id='logo'>
-              <Link to="/">
-                <img src={logo.src} alt={logo.alt} />
-              </Link>
-            </div>
-            <div id='links'>
-              <div>
-                <span className="material-symbols-outlined">
-                  home
-                </span>
-                <Link to="/">Inicio</Link>
-              </div>
-              <div>
-                <span className="material-symbols-outlined">
-                  leaderboard
-                </span>
-                <Link to="/ranking">Ranking</Link>
-              </div>
-              <div>
-                <span className="material-symbols-outlined">
-                  quiz
-                </span>
-                <Link to="/filter">Questões</Link>
-              </div>
-              <div>
-                <span className="material-symbols-outlined">
-                  article
-                </span>
-                <Link to="/redaction">Redações</Link>
-              </div>
-              <div>
-                <span className="material-symbols-outlined">
-                  login
-                </span>
-                <Link to="/login">Login</Link>
-              </div>
-            </div>
+      <nav>
+        <div className="window">
+          <div id="logo">
+            <Link to="/">
+              <img src={logo.src} alt={logo.alt} />
+            </Link>
           </div>
-        </nav>
-        
-        <div className="content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/ranking" element={<Ranking />} />
-            <Route path="/filter" element={<Filter />} />
-            <Route path="/redaction" element={<Redaction />} />
-            <Route path="/login" element={<Login />} />
-          </Routes>
+          <div id="links">
+            {navItems.map((item, index) => (
+              <div key={index}>
+                <label htmlFor={`${item.id}-link`} className="nav-icon">{item.icon && <item.icon />}</label>
+                <Link to={item.path} id={`${item.id}-link`}>{item.text}</Link>
+              </div>
+            ))}
+          </div>
         </div>
-      </Router>
+      </nav>
     </>
   )
 }

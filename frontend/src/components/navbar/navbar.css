@@ -37,7 +37,7 @@ nav > div {
     align-items: center;
 }
 
-#links div > a{
+#links div > *{
     text-decoration: none;
     color: rgb(219, 229, 237);
     font-size: 1.8rem;
