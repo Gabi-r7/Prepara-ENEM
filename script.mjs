@@ -147,11 +147,13 @@ async function uploadLocalPDF(filePath, displayName) {
     }
 }
 
+const theme = "Desafios para a valorização da herança africana no Brasil";
+
 // --- Função main (sem alterações, mas certifique-se que chama uploadLocalPDF) ---
 async function main() {
     try {
         const content = [
-             { text: "Use o seguinte contexto para avaliar o texto abaixo de acordo com as competências do ENEM:" }
+             { text: "Use o seguinte contexto para avaliar o texto abaixo de acordo com as competências do ENEM, o tema é:", theme }
         ];
 
         // Seus caminhos locais (verifique se estão corretos)
@@ -182,11 +184,13 @@ async function main() {
             }
         }
 
+
         // Texto a ser corrigido
-        const text = `Após o início da pandemia de Covid-19 as condições de trabalho vêm sofrendo uma precarização que aumenta a cada ano. A chamada "Uberização", por exemplo, é um fenômeno que está se tornando cada vez mais comum. Diante disso, é necessário encontrar algumas soluções que promovam o crescimento econômico e que ainda combatam a precarização das condições de trabalho na era da tecnologia, como o aumento de vagas de trabalho e a qualificação de profissionais.
-        Deste modo, constatam-se as amplas taxas de desemprego, sobretudo, nas regiões periféricas. Neste viés, são notáveis os impactos aos indivíduos, principalmente aqueles com menor nível de escolaridade, que acabam enfrentando diversos impecilhos para serem contratados, dificultando a ascensão econômica dos mesmos. Além disso, devido as dificuldades de inserção no mercado de trabalho e as poucas oportunidades, muitos desses indivíduos acabam aceitando vagas de trabalho precarizadas.
-        Vale ressaltar, ainda, a negligência do Estado, que fiscaliza de forma ineficiente as formas de trabalho no território nacional. Embora inúmeras leis trabalhistas tenham sido criadas e implementadas desde o governo de Getúlio Vargas, os relatos de trabalhos precarizados no Brasil ainda são muito comuns. Deste modo, soluções podem ser tomadas utilizando-se das tecnologias presentes no cotidiano da população para que seja possível o crescimento econômico no país, lutando contra a precarização das condições de trabalho.
-        Portanto, é necessário que medidas sejam tomadas com o intuito de coibir o problema discorrido. Ao Estado, caberia a ampliação de programas de emprego visando diminuir a taxa de desemprego no Brasil e ainda facilitando aos indivíduos de diversos meios econômicos o acesso ao mercado de trabalho. Além disso, é necessário que este processo seja feito junto à medidas de regulamentação das condições de trabalho, visando coibir a precarização destas. Desta forma, será possível promover o crescimento econômico e a diminuição da precarização das condições de trabalho no país.`; // Coloque seu texto aqui
+        const text = `Cultura, o que seria de um indivíduo se este atríbuto próprio não fosse valorizado? Como este indivíduo poderia participar de um meio social se toda sua herança não fosse reconhecida pela sociedade? Infelizmente, esta é a situação que se encontram as pessoas de descendência africana no Brasil.
+	Tal problema se dá pelo alto preconceito e discriminação sofridos por afro-descendentes no Brasil. Fato que não é recente, pois, desde a época imperial, existem acontecimentos de repressão à herança africana, como a catequisação de escravos trazidos da África, além do próprio racismo que existe até os dias atuais.
+	Com isso, espera-se alguma atitude por parte dos governantes, coisa que não se encontra com facilidade, exceto pelas leis de abolição à escravidão, estas que foram ineficientes e apenas retardaram a conquista da Lei Áurea.
+	Atualmente, nada mais se fala sobre tais assuntos, no máximo algumas discussões sobre desigualdade racial e o respeito à todos. Porém, apenas a conscientizacação sobre o racismo não garante que a sociedade valorize a herança africana desses indivíduos, mesmo que amenize o problema.
+	Portanto, necessita-se de resoluções mais assertivas vindas do Estado, como o estudo de culturas africanas nas aulas de artes nas escolas, a construção de mais centros artísticos e culturais pelo país, etc. Já do ponto de vista social, espera-se mais empatia e respeito com o próximo por parte dos indivíduos.`; // Coloque seu texto aqui
 
         // --- INSTRUÇÃO DETALHADA PARA A IA ---
         const detailedPromptInstruction = `
