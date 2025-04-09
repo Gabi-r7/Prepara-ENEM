@@ -126,7 +126,7 @@ async function uploadLocalPDF(filePath, displayName) {
         let processedFile = await ai.files.get({ name: uploadedFile.name }); // << Usa uploadedFile.name
         while (processedFile.state === "PROCESSING") {
             console.log(`Current file status for ${displayName}: ${processedFile.state}. Retrying in 5 seconds...`);
-            await new Promise((resolve) => setTimeout(resolve, 5000));
+            await new Promise((resolve) => setTimeout(resolve, 25000));
             processedFile = await ai.files.get({ name: uploadedFile.name }); // << Usa uploadedFile.name
         }
 
@@ -188,7 +188,69 @@ async function main() {
         Vale ressaltar, ainda, a negligência do Estado, que fiscaliza de forma ineficiente as formas de trabalho no território nacional. Embora inúmeras leis trabalhistas tenham sido criadas e implementadas desde o governo de Getúlio Vargas, os relatos de trabalhos precarizados no Brasil ainda são muito comuns. Deste modo, soluções podem ser tomadas utilizando-se das tecnologias presentes no cotidiano da população para que seja possível o crescimento econômico no país, lutando contra a precarização das condições de trabalho.
         Portanto, é necessário que medidas sejam tomadas com o intuito de coibir o problema discorrido. Ao Estado, caberia a ampliação de programas de emprego visando diminuir a taxa de desemprego no Brasil e ainda facilitando aos indivíduos de diversos meios econômicos o acesso ao mercado de trabalho. Além disso, é necessário que este processo seja feito junto à medidas de regulamentação das condições de trabalho, visando coibir a precarização destas. Desta forma, será possível promover o crescimento econômico e a diminuição da precarização das condições de trabalho no país.`; // Coloque seu texto aqui
 
-        content.push({ text: `Agora, dê notas ao seguinte texto de acordo com as competências do ENEM apresentadas nos arquivos acima:\n${text}` });
+        // --- INSTRUÇÃO DETALHADA PARA A IA ---
+        const detailedPromptInstruction = `
+        **Instrução Detalhada para Avaliação da Redação ENEM:**
+
+        Você é um corretor especialista do ENEM. Sua tarefa é analisar a redação fornecida abaixo, utilizando **estritamente** as informações e critérios presentes nos arquivos PDF anexados (Competência 1 a 5 e Situações de nota zero) como base para sua avaliação.
+
+        **Formato da Resposta Obrigatório:**
+
+        Siga **exatamente** esta estrutura de formatação em Markdown para a sua resposta:
+
+        ---
+
+        ### **Competência 1 – Domínio da norma culta da língua portuguesa**
+        **Nota: [Nota C1 aqui]/200**
+
+        [Análise detalhada da Competência 1. Mencione erros específicos de gramática, ortografia, pontuação, concordância etc., citando trechos do texto do aluno como exemplos. Ex: "Erro em '[trecho errado]' → Correto: '[trecho correto]'." Se não houver erros significativos, justifique a nota alta.]
+
+        ---
+
+        ### **Competência 2 – Compreensão do tema e aplicação das áreas de conhecimento**
+        **Nota: [Nota C2 aqui]/200**
+
+        [Análise detalhada da Competência 2. Avalie a compreensão do tema, a abordagem, e o uso de repertório sociocultural (citações, dados, fatos históricos, etc.). Indique pontos fortes (ex: ✅ Compreensão adequada do tema) e pontos a melhorar (ex: 🔹 Faltou repertório sociocultural legitimado). Seja específico sobre o que faltou ou poderia ser aprofundado.]
+
+        ---
+
+        ### **Competência 3 – Organização e progressão argumentativa**
+        **Nota: [Nota C3 aqui]/200**
+
+        [Análise detalhada da Competência 3. Avalie a estrutura do texto (introdução, desenvolvimento, conclusão), a coesão entre parágrafos, a clareza na defesa do ponto de vista e a progressão lógica das ideias. Aponte falhas na argumentação, lacunas ou conexões fracas entre as ideias.]
+
+        ---
+
+        ### **Competência 4 – Uso dos mecanismos linguísticos para argumentação**
+        **Nota: [Nota C4 aqui]/200**
+
+        [Análise detalhada da Competência 4. Avalie o uso de conectivos (conjunções, preposições), a coesão intra e interparágrafos e a variedade do vocabulário. Aponte repetições excessivas ou uso inadequado de elementos coesivos.]
+
+        ---
+
+        ### **Competência 5 – Elaboração da proposta de intervenção**
+        **Nota: [Nota C5 aqui]/200**
+
+        [Análise detalhada da Competência 5. Avalie se a proposta de intervenção é completa, detalhada e relacionada ao tema/argumentos. Verifique a presença dos elementos essenciais: Agente, Ação, Meio/Modo de execução, Finalidade e Detalhamento de um desses elementos. Indique o que está bom e o que pode ser melhorado ou está faltando.]
+
+        ---
+
+        ### **Nota final: [Soma das notas C1 a C5]/1000**
+
+        [Breve resumo geral com os principais pontos fortes e fracos da redação. Ofereça recomendações claras e acionáveis (ex: ✔ Revisar concordância verbal; ✔ Incluir dados estatísticos) para o aluno melhorar.]
+
+        ---
+
+        **Texto do Aluno para Avaliação:**
+
+        ${text}
+        `;
+
+// Limpa a instrução inicial genérica se ela não for mais necessária
+// content.shift(); // Remove o primeiro item "{ text: "Use o seguinte contexto..." }" se não quiser mais ele
+
+// Adiciona a instrução detalhada e o texto do aluno ao final
+        content.push({ text: detailedPromptInstruction });
 
         console.log("Generating content with Gemini...");
         
@@ -197,15 +259,23 @@ async function main() {
             model: "gemini-1.5-flash",
             contents: requestPayload 
         });
-        const response = result.response;
+        const response = result;
 
         console.log("\n--- Resposta da IA ---");
         // Adicionar verificação se a resposta ou o texto existem
-        if (response && response.text) {
-            console.log(response.text());
-        } else {
-            console.log("A IA não retornou um texto na resposta.");
-            console.log("Resposta completa:", JSON.stringify(result, null, 2)); // Logar a resposta completa para depuração
+        console.log("response:", response);
+        console.log("response.text:", response.text);
+        // Exporta o texto final para um arquivo Markdown
+        const outputFilePath = path.join(process.cwd(), "resultado_avaliacao.md");
+        try {
+            if (response && response.text) {
+                await fs.writeFile(outputFilePath, response.text, "utf8");
+                console.log(`Texto final exportado para: ${outputFilePath}`);
+            } else {
+                console.log("Nenhum texto foi gerado para exportar.");
+            }
+        } catch (writeError) {
+            console.error("Erro ao exportar o texto para o arquivo Markdown:", writeError);
         }
 
     } catch (error) {
