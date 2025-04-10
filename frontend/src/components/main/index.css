@@ -20,6 +20,8 @@
   --color-essay: #38b6ff;
   --color-ranking: #f1c40f;
   --color-home: rgb(166, 0, 255);
+  --color-filter-checkbox: #f1c40f;
+  --color-filter-checkbox-selected: #12f33b; /* Cor de fundo alterada */
 
   .material-symbols-outlined {
     font-variation-settings:
@@ -48,14 +50,7 @@ body *{
   display: flex;
   height: 100vh;
   width: 100vw;
-  overflow: hidden; 
-}
-
-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  overflow-y: auto;
+  box-sizing: border-box; 
 }
 
 .main-content {
@@ -66,7 +61,7 @@ nav {
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  gap: 1rem;
+  gap: 2rem;
 }
 
 .window {

@@ -5,7 +5,10 @@ nav {
     left: 0;
     padding: 1em;
     width: var(--nav-width);
-    height: 100dvh;/* Garante que a altura do nav seja igual à altura da janela */
+    box-sizing: border-box;
+    overflow: hidden;
+    height: 100vh;
+    margin: 0;
 }
 
 nav > div {

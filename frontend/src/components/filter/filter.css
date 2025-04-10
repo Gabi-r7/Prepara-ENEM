@@ -1,16 +1,68 @@
-.filter-container{
+#filter-container{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+}
+
+/* select */
+
+.filter-container-select{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
     gap: 2rem;
     padding: 1rem;
     grid-auto-flow: column;
 }
 
-.filter-label{
+.filter-container-select > div{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.filter-select-label{
     font-size: 1.3rem;
     font-weight: bold;
 }
+
+/* checkbox */
+
+.filter-container-checkbox{
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.filter-checkbox-label{
+    font-size: 1.3rem;
+    font-weight: bold;
+    background-color: var(--color-filter-checkbox);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    height: 100%;
+    gap: 1rem;
+    cursor: pointer;
+    color: #192633;
+}
+
+.filter-checkbox-input{
+    display: none;
+}
+
+.filter-checkbox-icon{
+    display: none;
+    font-size: 2rem;
+}
+
+.filter-checkbox-input:checked + .filter-checkbox-label>.filter-checkbox-icon {
+    display: block;
+}
+
+/* general */
 
 .filter-item{
     display: flex;

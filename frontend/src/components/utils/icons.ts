@@ -4,6 +4,8 @@ import { FaRankingStar } from "react-icons/fa6";
 import { IoMdSettings } from "react-icons/io";
 import { MdLiveHelp } from "react-icons/md";
 import { BiLogIn } from "react-icons/bi";
+import { GrCheckboxSelected } from "react-icons/gr";
+import { FaCheck } from "react-icons/fa";
 
 const icons = {
     Filter: FaFilter,
@@ -15,6 +17,8 @@ const icons = {
     Essay: FaFileAlt,
     Question: RiQuestionAnswerFill,
     Home: FaHome,
+    Checkbox: GrCheckboxSelected,
+    Checked: FaCheck,
 };
 
 export default icons;
