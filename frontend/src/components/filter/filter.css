@@ -62,6 +62,60 @@
     display: block;
 }
 
+/* tags */
+
+.filter-tags-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.filter-tags-container  > div{
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    box-sizing: border-box ;
+}
+
+.filter-tag-label{
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.filter-tag-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #192633;;
+    padding: 0.2rem;
+    border-radius: 5px;
+    height: 100%;
+    gap: 0.5rem;
+}
+
+.remove-tag-button{
+    border: none;
+    display: flex;
+    justify-content: center;
+    background-color: transparent;
+    color: #ffffff;
+    cursor: pointer;
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 1rem;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.remove-tag-button:hover{
+    background-color: white;
+    color: black;
+    border-radius: 50%;
+    transition: 0.2s;
+}
+
+
+
 /* general */
 
 .filter-item{
