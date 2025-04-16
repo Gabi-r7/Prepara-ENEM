@@ -2,13 +2,14 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import Navbar from '../navbar/navbar.tsx'
+import Navbar from '../navbar/navbar'
 import Login from '../login/login'
 import Home from '../home/home'
 import Filter from '../filter/filter'
 import Ranking from '../ranking/ranking'
 import Essay from '../essay/essay'
-import Footer from '../footer/footer.tsx'
+import Footer from '../footer/footer'
+import Profile from '../profile/profile'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -22,6 +23,7 @@ createRoot(document.getElementById('root')!).render(
             <Route path="/filter" element={<Filter />} />
             <Route path="/essay" element={<Essay />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
           <Footer/>
         </div>
