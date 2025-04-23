@@ -186,11 +186,16 @@ async function main() {
 
 
         // Texto a ser corrigido
-        const text = `Cultura, o que seria de um indivíduo se este atríbuto próprio não fosse valorizado? Como este indivíduo poderia participar de um meio social se toda sua herança não fosse reconhecida pela sociedade? Infelizmente, esta é a situação que se encontram as pessoas de descendência africana no Brasil.
+        const text1 = `Cultura, o que seria de um indivíduo se este atríbuto próprio não fosse valorizado? Como este indivíduo poderia participar de um meio social se toda sua herança não fosse reconhecida pela sociedade? Infelizmente, esta é a situação que se encontram as pessoas de descendência africana no Brasil.
 	Tal problema se dá pelo alto preconceito e discriminação sofridos por afro-descendentes no Brasil. Fato que não é recente, pois, desde a época imperial, existem acontecimentos de repressão à herança africana, como a catequisação de escravos trazidos da África, além do próprio racismo que existe até os dias atuais.
 	Com isso, espera-se alguma atitude por parte dos governantes, coisa que não se encontra com facilidade, exceto pelas leis de abolição à escravidão, estas que foram ineficientes e apenas retardaram a conquista da Lei Áurea.
 	Atualmente, nada mais se fala sobre tais assuntos, no máximo algumas discussões sobre desigualdade racial e o respeito à todos. Porém, apenas a conscientizacação sobre o racismo não garante que a sociedade valorize a herança africana desses indivíduos, mesmo que amenize o problema.
 	Portanto, necessita-se de resoluções mais assertivas vindas do Estado, como o estudo de culturas africanas nas aulas de artes nas escolas, a construção de mais centros artísticos e culturais pelo país, etc. Já do ponto de vista social, espera-se mais empatia e respeito com o próximo por parte dos indivíduos.`; // Coloque seu texto aqui
+
+        const text = `	Após o início da pandemia de Covid-19, com o isolamento dos indivíduos, a necessidade de socialização e interação entre os mesmos foi cada vez mais sendo suprida em plataformas digitais. Entretanto, com o passar dos anos surgiu a dúvida sobre a responsabilidade das plataformas digitais, haja vista os impactos das redes sociais na saúde mental dos usuários.
+	Diante disso, vale ressaltar os impactos causados pela alta liberação de dopamina, hormônio responsável pelo prazer, enquanto os usuários utilizam as redes sociais. Deste modo, os usuários viciam-se nas redes sociais de modo semelhante ao vício em intorpecentes, como o cigarro. Com isso, as redes sociais conseguem um fluxo constante de usuários, mesmo que estes sejam afetados mentalmente.
+	Além disso, diversas plataformas digitais, como sites de notícias e redes sociais, utilizam algoritmos que sugerem conteúdos baseados em interesses dos usuários. Deste modo, as plataformas acabam fortalecendo pensamentos e opiniões de seus usuários, mesmo que estas sejam violentas e até mesmo discursos de ódio, embora as plataformas não sejam responsabilizadas.
+	Portanto, para que os impactos das redes sociais na saúde mental dos usuários sejam amenizados, cabe ao Estado promover regulamentações para plataformas digitais por meio de projetos de lei, além de responsabilizá-los pelos conteúdos apresentados. Além disso, cabe a população promover atividades ao ar livre, visando diminuir os impactos das redes sociais na saúde mental dos usuários.`;
 
         // --- INSTRUÇÃO DETALHADA PARA A IA ---
         const detailedPromptInstruction = `
