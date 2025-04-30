@@ -8,7 +8,8 @@ import Home from '../home/home'
 import Filter from '../filter/filter'
 import Ranking from '../ranking/ranking'
 import Essay from '../essay/essay'
-import Footer from '../footer/footer.tsx'
+import Footer from '../footer/footer'
+import Question from '../question/question';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -22,6 +23,7 @@ createRoot(document.getElementById('root')!).render(
             <Route path="/filter" element={<Filter />} />
             <Route path="/essay" element={<Essay />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/Question" element={<Question />}/>
           </Routes>
           <Footer/>
         </div>

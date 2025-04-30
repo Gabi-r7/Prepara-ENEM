@@ -1,0 +1,34 @@
+{
+    "humanas": [
+        {
+            "text-1": "¿Qué es la historia?",
+            "text-2": "La historia es la ciencia que estudia y narra los acontecimientos pasados de la humanidad.", 
+            "alternatives": [
+                "La historia es la ciencia que estudia y narra los acontecimientos pasados de la humanidad.",
+                "La historia es la ciencia que estudia los fenómenos naturales.",
+                "La historia es la ciencia que estudia las lenguas y culturas del mundo."
+            ],
+            "answer": 2
+        },
+        {
+            "text-1": "¿hjklhjklhjklhj?",
+            "text-2": "La historia es la ciencia que estudia y narra los acontecimientos pasados de la humanidad.", 
+            "alternatives": [
+                "La historia es la ciencia que estudia y narra los acontecimientos pasados de la humanidad.",
+                "La historia es la ciencia que estudia los fenómenos naturales.",
+                "La historia es la ciencia que estudia las lenguas y culturas del mundo."
+            ],
+            "answer": 2
+        },
+        {
+            "text-1": "¿adfasdfasdf",
+            "text-2": "La historia es la ciencia que estudia y narra los acontecimientos pasados de la humanidad.", 
+            "alternatives": [
+                "La historia es la ciencia que estudia y narra los acontecimientos pasados de la humanidad.",
+                "La historia es la ciencia que estudia los fenómenos naturales.",
+                "La historia es la ciencia que estudia las lenguas y culturas del mundo."
+            ],
+            "answer": 2
+        }
+    ]
+}

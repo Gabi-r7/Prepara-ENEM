@@ -3,6 +3,8 @@ import './filter.css';
 import Tittle from '../tittle/tittle';
 import icons from '../utils/icons';
 
+import {Link} from 'react-router-dom'
+
 function Filter() {
 
     const [selectedFilters, setSelectedFilters] = useState({
@@ -252,6 +254,11 @@ function Filter() {
                     </div>
                 </>
             )}
+            <div>
+                <Link to="/Question">Questões</Link> 
+            </div>
+
+
         </>
     );
 }
