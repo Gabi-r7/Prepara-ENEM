@@ -1,9 +1,16 @@
 import './footer.css';
 
 function Footer() {
+
+    
+
     return (
         <>
-            dsfsdfsefsdfsdfs
+            <footer >
+                <div className="footer-content">
+                    foooooooootttttttterrrrrrrrrrrr
+                </div>
+            </footer>
         </>
       );
 }
