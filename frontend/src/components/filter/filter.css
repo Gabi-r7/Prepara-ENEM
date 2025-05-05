@@ -1,0 +1,131 @@
+#filter-container{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+}
+
+/* select */
+
+.filter-container-select{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 2rem;
+    padding: 1rem;
+    grid-auto-flow: column;
+}
+
+.filter-container-select > div{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.filter-select-label{
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+/* checkbox */
+
+.filter-container-checkbox{
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.filter-checkbox-label{
+    font-size: 1.3rem;
+    font-weight: bold;
+    background-color: var(--color-filter-checkbox);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    height: 100%;
+    gap: 1rem;
+    cursor: pointer;
+    color: #192633;
+}
+
+.filter-checkbox-input{
+    display: none;
+}
+
+.filter-checkbox-icon{
+    display: none;
+    font-size: 2rem;
+}
+
+.filter-checkbox-input:checked + .filter-checkbox-label>.filter-checkbox-icon {
+    display: block;
+}
+
+/* tags */
+
+.filter-tags-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.filter-tags-container  > div{
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    box-sizing: border-box ;
+}
+
+.filter-tag-label{
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.filter-tag-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #192633;;
+    padding: 0.2rem;
+    border-radius: 5px;
+    height: 100%;
+    gap: 0.5rem;
+}
+
+.remove-tag-button{
+    border: none;
+    display: flex;
+    justify-content: center;
+    background-color: transparent;
+    color: #ffffff;
+    cursor: pointer;
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 1rem;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.remove-tag-button:hover{
+    background-color: white;
+    color: black;
+    border-radius: 50%;
+    transition: 0.2s;
+}
+
+/* general */
+
+.filter-item{
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+select{
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    background-color: #192633;
+}
