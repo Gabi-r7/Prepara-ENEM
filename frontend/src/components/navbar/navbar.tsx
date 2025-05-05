@@ -16,6 +16,7 @@ function Navbar() {
     { path: '/filter', text: 'Questões', icon: icons.Filter , id: 'questions'},
     { path: '/essay', text: 'Redações', icon: icons.Essay , id: 'essay'},
     { path: '/login', text: 'Login', icon: icons.Login , id: 'login'},
+    { path: '/profile', text: 'Perfil', icon: icons.Profile , id: 'profile'},
   ];
 
   return (
