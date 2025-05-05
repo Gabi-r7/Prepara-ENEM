@@ -3,38 +3,49 @@
 ### **Competência 1 – Domínio da norma culta da língua portuguesa**
 **Nota: 160/200**
 
-A redação apresenta alguns desvios gramaticais, de acentuação e de escolha de vocábulos. Há problemas de concordância verbal em "existem acontecimentos de repressão à herança africana", em que o verbo "existem" deveria concordar com "acontecimentos", que é plural. Também, "espera-se alguma atitude" apresenta concordância inadequada, visto que "atitude" é singular.  Em "porém apenas a conscientizacação sobre o racismo não garante que a sociedade valorize a herança africana desses indivíduos", há um desvio de concordância nominal entre "conscientizacação" e "sociedade". Finalmente, há um problema de escolha de vocábulo em "coisa que não se encontra com facilidade" e "mais assertivas vindas do Estado", ambos imprecisos e sem clareza. A repetição da palavra "racismo" e o uso de expressões como "coisa que" demonstram falta de vocabulário e prejudicam a clareza do texto. Há também problemas de acentuação e ortografia em algumas palavras, como "conscientizacação" (conscientização) e "afro-descendentes" (afrodescendentes). Apesar desses desvios, a redação demonstra um domínio mediano da língua portuguesa, com alguns desvios gramaticais e de convenções da escrita.
+A redação apresenta alguns desvios gramaticais e de convenções da escrita. Em "Tal problema se dá pelo alto preconceito e discriminação sofridos por afro-descendentes no Brasil", o correto seria "Tal problema se dá devido ao alto preconceito e à discriminação sofridos por afro-descendentes no Brasil". Há também um erro de concordância verbal na frase: "exceto pelas leis de abolição à escravidão, estas que foram ineficientes". O correto seria "exceto pelas leis de abolição à escravidão, as quais foram ineficientes".  Além disso, a palavra "conscientizacação" está incorretamente grafada: o correto é "conscientização". Apesar desses problemas, a redação demonstra um domínio mediano da norma culta, e a nota reflete isso.
 
 ---
 
 ### **Competência 2 – Compreensão do tema e aplicação das áreas de conhecimento**
-**Nota: 120/200**
+**Nota: 180/200**
 
-A redação demonstra uma compreensão mediana do tema, ao abordar o problema do preconceito e da discriminação contra pessoas de descendência africana no Brasil. O texto menciona o racismo desde a época imperial, cita a catequização de escravos e a falta de eficiência das leis de abolição à escravidão como fatores que contribuem para o problema. ✅ Apresentação de um panorama histórico do problema racial no Brasil. No entanto, a redação não utiliza recursos de repertório sociocultural além das informações já presentes nos textos motivadores.  🔹 Faltou repertório sociocultural que pudesse enriquecer a discussão, como citações de pensadores, dados estatísticos ou fatos históricos relevantes. O texto fica limitado a uma descrição dos problemas sem trazer uma análise mais aprofundada.
+A redação demonstra uma compreensão adequada do tema, que é a falta de valorização da cultura afro-brasileira. O texto apresenta uma discussão pertinente sobre o tema, abordando o problema do racismo e suas consequências, além de mencionar a época imperial como marco histórico de repressão à herança africana. No entanto, a redação poderia ser aprimorada com um repertório mais consistente e diversificado, utilizando dados estatísticos, fatos históricos ou citações de especialistas para fundamentar melhor a argumentação.  A menção à Lei Áurea é um bom começo, mas uma análise mais profunda das leis de abolição da escravidão seria pertinente.
 
 ---
 
 ### **Competência 3 – Organização e progressão argumentativa**
-**Nota: 120/200**
+**Nota: 140/200**
 
-A redação apresenta uma organização mediana. Há uma introdução que contextualiza o problema e uma conclusão que apresenta uma proposta de intervenção, mas o desenvolvimento entre esses parágrafos é fragmentado e superficial.  🔹 O desenvolvimento do texto poderia ser melhorado.  Falta de progressão lógica e coesão entre as ideias. Os parágrafos são curtos e pouco desenvolvidos. O argumento central não está presente em todos os parágrafos. A conexão entre o problema e a solução proposta fica vaga.
+A redação apresenta uma organização razoável das ideias, seguindo uma estrutura básica de introdução, desenvolvimento e conclusão. No entanto, há problemas de progressão argumentativa. A discussão sobre o racismo na época imperial não se conecta diretamente à argumentação presente na conclusão sobre a necessidade de resoluções vindas do Estado. A conexão entre os parágrafos poderia ser melhor explorada para garantir uma progressão mais fluida e lógica. A conclusão apresenta sugestões de intervenção, porém a argumentação poderia ser mais aprofundada para justificar cada proposta.
+
 
 ---
 
 ### **Competência 4 – Uso dos mecanismos linguísticos para argumentação**
-**Nota: 80/200**
+**Nota: 120/200**
 
-A redação apresenta problemas de coesão textual. O uso de conectivos é pouco diversificado e, em alguns momentos, inadequado, prejudicando a articulação entre as ideias.  🔹 Uso limitado e inadequado de elementos coesivos. Há repetição de palavras e expressões como "racismo" e "preconceito", e o texto não utiliza operadores argumentativos para concatenar adequadamente os argumentos. A organização sintática prejudica a clareza da redação.  A falta de conectivos e de articulação entre as ideias gera falta de progressão textual.
+A redação demonstra um uso mediano de recursos coesivos para a articulação do texto. Há alguns conectivos, como "pois", "com isso", e "porém", que auxiliam na organização das ideias, mas, em geral, a coesão textual não é totalmente eficaz. A repetição de termos ("a sociedade", "indivíduos", "racismo") em alguns momentos prejudica um pouco a fluidez e a clareza da argumentação. O uso de mecanismos coesivos poderia ser mais diversificado para garantir uma articulação mais consistente.
 
 ---
 
 ### **Competência 5 – Elaboração da proposta de intervenção**
 **Nota: 100/200**
 
-A redação apresenta uma proposta de intervenção coerente com a temática e a discussão apresentada.  ✅ Proposta de intervenção coerente com a problemática discutida.  No entanto, a proposta não é suficientemente detalhada.  🔹 A proposta precisa ser mais completa e detalhada, explicando como cada ação deve ser implementada e quem seria o responsável por cada uma delas. Faltou detalhamento de alguns elementos, ou seja, falta clareza em relação ao agente, ao modo/meio de execução, aos efeitos pretendidos e em relação a que outro elemento isso faz referência.  A proposta poderia incluir exemplos concretos de como essas ações podem ser colocadas em prática, buscando promover a valorização da herança africana.
+A redação apresenta uma proposta de intervenção, porém esta não é suficientemente detalhada ou completa. A proposta menciona a necessidade de resoluções vindas do Estado, mas não explicita claramente o que esses órgãos devem fazer, e não apresenta elementos essenciais como: ação, agente, modo/meio, efeito e detalhamento.  Há uma lista de sugestões (estudo de culturas africanas nas escolas, construção de centros artísticos, etc.), mas a falta de clareza e detalhamento dessas sugestões prejudica a avaliação dessa competência.  Seria necessário detalhar como esses projetos seriam implementados, quem seria o responsável pela execução e qual o efeito esperado dessas ações.
+
 
 ---
 
-### **Nota final: 560/1000**
+### **Nota final: 600/1000**
 
-A redação apresenta uma compreensão mediana do tema, mas fica aquém do esperado no que diz respeito à organização textual, à argumentação e à proposta de intervenção. O texto demonstra domínio mediano da norma culta da língua portuguesa, mas apresenta desvios que afetam sua coesão. Para melhorar, o aluno deve revisar a concordância, a coesão textual, melhorar o desenvolvimento da argumentação, aprofundar o uso de repertório sociocultural e detalhar a proposta de intervenção, incluindo ações, agentes, meios, efeitos e detalhamentos mais específicos.  Recomenda-se também revisar a ortografia e a acentuação de palavras.
+A redação demonstra uma compreensão mediana do tema e apresenta uma discussão razoável sobre o mesmo, porém com problemas de progressão argumentativa, coesão textual, e elaboração da proposta de intervenção. O domínio da norma culta é mediano.  A redação demonstra potencial, mas precisa de revisão em diversos pontos, principalmente no que diz respeito à articulação das ideias, à diversificação do repertório, e à elaboração da proposta de intervenção.
+
+**Recomendações para o aluno:**
+
+✔ Revisar a concordância verbal e nominal.
+✔ Corrigir os erros de ortografia e acentuação.
+✔ Aprimorar a coesão textual, utilizando mecanismos coesivos com maior variedade.
+✔ Aprimorar a progressão argumentativa, estabelecendo conexões mais claras entre os parágrafos.
+✔ Desenvolver melhor a proposta de intervenção, explicitando a ação, o agente, o modo/meio, o efeito e detalhamento de cada elemento.
+✔ Incluir dados estatísticos, fatos históricos ou citações para fundamentar a argumentação.
