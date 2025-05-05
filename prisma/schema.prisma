@@ -94,5 +94,6 @@ model Alternativa {
   letra       String
   texto       String
   Questoes_id Int
+  imagem_auxiliar String?
   questao     Questao @relation(fields: [Questoes_id], references: [id])
 }
