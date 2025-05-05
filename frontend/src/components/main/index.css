@@ -17,9 +17,11 @@
   --windows-color: #f9f9f9;
   --nav-width: 16rem;
   --color-filter: #f5f5f5;
-  --color-essay: #38b6ff;
+  --color-essay: #41b9ff;
   --color-ranking: #f1c40f;
   --color-home: rgb(166, 0, 255);
+  --color-question: #0400ff;
+  --color-profile: #2ecc71;
   --color-filter-checkbox: #f1c40f;
   --color-filter-checkbox-selected: #12f33b; /* Cor de fundo alterada */
 

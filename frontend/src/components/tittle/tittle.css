@@ -10,6 +10,12 @@
 .tittle-Home{
     background-color: var(--color-home);
 }
+.tittle-Question{
+    background-color: var(--color-question);
+}
+.tittle-Profile{
+    background-color: var(--color-profile);
+}
 
 .tittle{
     color: black;

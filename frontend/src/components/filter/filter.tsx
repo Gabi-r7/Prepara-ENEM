@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './filter.css';
 import Tittle from '../tittle/tittle';
 import icons from '../utils/icons';
+import Tag from '../tag/tag';
 
 import {Link} from 'react-router-dom'
 
@@ -183,74 +184,68 @@ function Filter() {
             }) && (
                 <>
                     <div className="filter-tags-container window">
-                        {selectedFilters['filter-subject'].length > 0 && (
-                            <>
-                                <div>
-                                    <span className="filter-tag-label">Disciplina</span>
-                                    {selectedFilters['filter-subject'].map((subject) => (
-                                        <div key={subject} className="filter-tag-item">
-                                            <span className="filter-tag">
-                                                {filters.find(f => f.id === 'filter-subject')?.options.find(option => option.value === subject)?.text || subject}
-                                            </span>
-                                            <button className="remove-tag-button" onClick={() => handleRemoveTag('filter-subject', subject)}>
-                                                ✕
-                                            </button>
-                                        </div>
-                                    ))}
-                                </div>
-                            </>
+                        {/* {selectedFilters['filter-subject'].length > 0 && (
+                            <Tag
+                                label="Anos"
+                                filterKey="filter-subject"
+                                selectedValues={selectedFilters['filter-subject']}
+                                options={filters.find(f => f.id === 'filter-subject')?.options || []}
+                                onRemove={handleRemoveTag}
+                            />
                         )}
                         {selectedFilters['filter-year'].length > 0 && (
-                            <>
-                                <div>
-                                    <span className="filter-tag-label">Anos</span>
-                                    {selectedFilters['filter-year'].map((year) => (
-                                        <div key={year} className="filter-tag-item">
-                                            <span className="filter-tag">
-                                                {filters.find(f => f.id === 'filter-year')?.options.find(option => option.value === year)?.text || year}
-                                            </span>
-                                            <button className="remove-tag-button" onClick={() => handleRemoveTag('filter-year', year)}>
-                                                ✕
-                                            </button>
-                                        </div>
-                                    ))}
-                                </div>
-                            </>
+                            <Tag
+                                label="Anos"
+                                filterKey="filter-year"
+                                selectedValues={selectedFilters['filter-year']}
+                                options={filters.find(f => f.id === 'filter-year')?.options || []}
+                                onRemove={handleRemoveTag}
+                            />
                         )}
-                        {selectedFilters['filter-template'] != "" && (
-                            <>
-                                <div>
-                                    <span className="filter-tag-label">Gabarito</span>
-                                    {selectedFilters['filter-template'] && (
-                                        <div key="filter-template" className="filter-tag-item">
-                                            <span className="filter-tag">
-                                                {filters.find(f => f.id === 'filter-template')?.options.find(option => option.value === selectedFilters['filter-template'])?.text || selectedFilters['filter-template']}
-                                            </span>
-                                            <button className="remove-tag-button" onClick={() => handleRemoveTag('filter-template')}>
-                                                ✕
-                                            </button>
-                                        </div>
-                                    )}
-                                </div>
-                            </>
+                        {selectedFilters['filter-template'] !== "" && (
+                            <Tag
+                                label="Gabarito"
+                                filterKey="filter-template"
+                                selectedValues={[selectedFilters['filter-template']]} // Passa o valor como um array
+                                options={filters.find(f => f.id === 'filter-template')?.options || []}
+                                onRemove={handleRemoveTag}
+                            />
                         )}
                         {selectedFilters['filter-exibition'] != "" && (
-                            <>
-                                <div>
-                                    <span className="filter-tag-label">Forma de exibição</span>
-                                    {selectedFilters['filter-exibition'] && (
-                                        <div key="filter-exibition" className="filter-tag-item">
-                                            <span className="filter-tag">
-                                                {filters.find(f => f.id === 'filter-exibition')?.options.find(option => option.value === selectedFilters['filter-exibition'])?.text || selectedFilters['filter-exibition']}
-                                            </span>
-                                            <button className="remove-tag-button" onClick={() => handleRemoveTag('filter-exibition')}>
-                                                ✕
-                                            </button>
-                                        </div>
-                                    )}
-                                </div>
-                            </>
-                        )}
+                            <Tag
+                                label="Forma de exibição"
+                                filterKey="filter-exibition"
+                                selectedValues={[selectedFilters['filter-exibition']]}
+                                options={filters.find(f => f.id === 'filter-exibition')?.options || []}
+                                onRemove={handleRemoveTag}
+                            />
+                        )} */}
+                        {Object.entries(selectedFilters).map(([filterKey, selectedValue]) => {
+                            // Encontra o filtro correspondente
+                            const filter = filters.find(f => f.id === filterKey);
+
+                            // Verifica se o filtro existe e se há valores selecionados
+                            if (!filter || (Array.isArray(selectedValue) && selectedValue.length === 0) || (!Array.isArray(selectedValue) && selectedValue === "")) {
+                                return null;
+                            }
+
+                            // Gera as tags dinamicamente
+                            return (
+                                <Tag
+                                    key={filterKey}
+                                    label={filter.label}
+                                    filterKey={filterKey as keyof typeof selectedFilters}
+                                    selectedValues={
+                                        Array.isArray(selectedValue) 
+                                        ? (selectedValue as string[]).filter((val) => typeof val === 'string') 
+                                        : (typeof selectedValue === 'string' ? [selectedValue] : [])
+                                    }
+                                    options={filter.options}
+                                    onRemove={handleRemoveTag}
+                                />
+                            );
+                        })}
+                        {}
                     </div>
                 </>
             )}
