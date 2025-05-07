@@ -2,10 +2,10 @@ import './tag.css';
 
 interface TagProps {
     label: string;
-    filterKey: "filter-exibition" | "filter-template" | "filter-checkbox-random" | "filter-checkbox-answered" | "filter-subject" | "filter-year";
+    filterKey: "filter-exibition" | "filter-template" | "filter-remove" | "filter-order" | "filter-subject" | "filter-year";
     selectedValues: string[]; // Alterado para aceitar múltiplos valores
     options: { value: string; text: string }[];
-    onRemove: (filterKey: "filter-exibition" | "filter-template" | "filter-checkbox-random" | "filter-checkbox-answered" | "filter-subject" | "filter-year", itemToRemove: string) => void;
+    onRemove: (filterKey: "filter-exibition" | "filter-template" | "filter-remove" | "filter-order" | "filter-subject" | "filter-year", itemToRemove: string) => void;
 }
 
 const Tag: React.FC<TagProps> = ({ label, filterKey, selectedValues, options, onRemove }) => {

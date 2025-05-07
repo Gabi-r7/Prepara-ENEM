@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './filter.css';
 import Tittle from '../tittle/tittle';
-import icons from '../utils/icons';
 import Tag from '../tag/tag';
 
 import {Link} from 'react-router-dom'
@@ -13,8 +12,8 @@ function Filter() {
         'filter-exibition': '',
         'filter-subject': [],
         'filter-year': [],
-        'filter-checkbox-random': false,
-        'filter-checkbox-answered': false,
+        'filter-order': '',
+        'filter-remove': '',
     });
 
     const filters = [
@@ -22,7 +21,7 @@ function Filter() {
             id: 'filter-template',
             label: 'Gabarito',
             options: [
-                { value: '', text: 'Escolha uma opção', disabled: true, hidden: true },
+                { value: '', text: 'Escolha uma opção', disabled: true, hidden: true},
                 { value: '1', text: 'Ao responder todas as questões' },
                 { value: '2', text: 'Ao responder uma questão' },
             ],
@@ -31,7 +30,7 @@ function Filter() {
             id: 'filter-exibition',
             label: 'Forma de exibição',
             options: [
-                { value: '', text: 'Escolha uma opção', disabled: true, hidden: true },
+                { value: '', text: 'Escolha uma opção', disabled: true, hidden: true},
                 { value: '1', text: 'Questões em cascata' },
                 { value: '2', text: 'Questão por página' },
             ],
@@ -40,7 +39,7 @@ function Filter() {
             id: 'filter-subject',
             label: 'Disciplina',
             options: [
-                { value: '', text: 'Escolha uma opção', disabled: true, hidden: true },
+                { value: '', text: 'Escolha uma opção', disabled: true, hidden: true},
                 { value: '1', text: 'Ciências humanas' },
                 { value: '2', text: 'Ciências da natureza' },
                 { value: '3', text: 'Linguagens' },
@@ -51,7 +50,8 @@ function Filter() {
             id: 'filter-year',
             label: 'Ano',
             options: [
-                { value: '', text: 'Escolha uma opção', disabled: true, hidden: true },
+                { value: '', text: 'Escolha uma opção', disabled: true, hidden: true},
+                {text: 'Todos', value: '0'},
                 {text: '2009', value: '2009'},
                 {text: '2010', value: '2010'},
                 {text: '2011', value: '2011'},
@@ -69,33 +69,35 @@ function Filter() {
                 {text: '2023', value: '2023'},
             ],
         },
+        {
+            id: 'filter-order',
+            label: 'Ordenar',
+            options: [
+                { value: '', text: 'Escolha uma opção', disabled: true, hidden: true},
+                { value: '1', text: 'Mais novas' },
+                { value: '2', text: 'Mais antigas' },
+                { value: '3', text: 'Aleatório' },
+            ],
+        },
+        {
+            id: 'filter-remove',
+            label: 'Remover',
+            options: [
+                { value: '', text: 'Escolha uma opção', disabled: true, hidden: true},
+                { value: '1', text: 'Remover questões já respondidas' },
+                { value: 'none', text: 'Nada' },
+            ],
+        },
     ];
 
-    
-
-    const IconComponent = icons['Checked'];
-
     function handleSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
-        const { id, value } = event.target;
+        const { id, value } = event.target as { id: keyof typeof selectedFilters; value: string };
     
         setSelectedFilters((prevState) => {
-            if (Array.isArray((prevState[id as keyof typeof prevState] as string[]))) {
-                const currentArray = prevState[id as keyof typeof prevState] as string[];
-    
-                // Verifica se o valor já existe no array
-                if (!currentArray.includes(value)) {
-                    return {
-                        ...prevState,
-                        [id]: [...currentArray, value], // Adiciona o novo valor apenas se não existir
-                    };
-                }
-    
-                return prevState; // Retorna o estado atual se o valor já existir
-            }
-    
+            const selectedValue = filters.find(filter => filter.id === id)?.options.find(option => option.value === value)?.value || '';
             return {
                 ...prevState,
-                [id]: value,
+                [id]: Array.isArray(prevState[id]) ? [...(prevState[id] as string[]), selectedValue] : selectedValue,
             };
         });
     }
@@ -109,70 +111,42 @@ function Filter() {
         }));
     }
 
-    function handleCheckboxChange(event: React.ChangeEvent<HTMLInputElement>){
-        const { id, checked } = event.target;
-
-        setSelectedFilters((prevState) => ({
-            ...prevState,
-            [id]: checked,
-        }));
-    }
-
     return (
         <>
             <Tittle page="Filter" />
 
             <div id="filter-container">
                 <div className="filter-container-select window">
-                    {filters.map((filter) => (
-                        <div className="filter-item" key={filter.id}>
-                            <label className="filter-select-label" htmlFor={filter.id}>
-                                {filter.label}
-                            </label>
-                            <select
-                                id={filter.id}
-                                defaultValue=""
-                                onChange={handleSelectChange}
-                            >
-                                {filter.options.map((option, index) => (
-                                    <option
-                                        key={index}
-                                        value={option.value}
-                                        disabled={option.disabled || false}
-                                        hidden={option.hidden || false}
+                    {filters.map((filter) => {
+                        if (filter.options.length > 0) {
+                            return (
+                                <div key={filter.id} className="filter-select-container">
+                                    <label htmlFor={filter.id} className="filter-label">{filter.label}</label>
+                                    <select
+                                        id={filter.id}
+                                        className="filter-select"
+                                        value={selectedFilters[filter.id as keyof typeof selectedFilters]} // Define o valor do select
+                                        onChange={handleSelectChange}
                                     >
-                                        {option.text}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-                    ))}
-                </div>
-                <div className="filter-container-checkbox window">
-                    <div>
-                        <input
-                            id="filter-checkbox-random"
-                            type="checkbox"
-                            className="filter-checkbox-input"
-                            onChange={handleCheckboxChange}
-                        />
-                        <label htmlFor="filter-checkbox-random" className="filter-checkbox-label">
-                            Questões aleatórias
-                            <IconComponent className="filter-checkbox-icon" />
-                        </label>
-                    </div>
-                    <div>
-                        <input
-                            id="filter-checkbox-answered"
-                            type="checkbox"
-                            className="filter-checkbox-input"
-                            onChange={handleCheckboxChange}
-                        />
-                        <label htmlFor="filter-checkbox-answered" className="filter-checkbox-label">
-                            Questões já respondidas
-                            <IconComponent className="filter-checkbox-icon" />
-                        </label>
-                    </div>
+                                        <option value="" disabled>
+                                            Escolha uma opção
+                                        </option>
+                                        {filter.options.map((option) => (
+                                            <option
+                                                key={option.value}
+                                                value={option.value}
+                                                disabled={option.disabled}
+                                                hidden={option.hidden} // Adiciona a propriedade hidden
+                                            >
+                                                {option.text}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                            );
+                        }
+                        return null;
+                    })}
                 </div>
             </div>
 
@@ -184,68 +158,33 @@ function Filter() {
             }) && (
                 <>
                     <div className="filter-tags-container window">
-                        {/* {selectedFilters['filter-subject'].length > 0 && (
-                            <Tag
-                                label="Anos"
-                                filterKey="filter-subject"
-                                selectedValues={selectedFilters['filter-subject']}
-                                options={filters.find(f => f.id === 'filter-subject')?.options || []}
-                                onRemove={handleRemoveTag}
-                            />
-                        )}
-                        {selectedFilters['filter-year'].length > 0 && (
-                            <Tag
-                                label="Anos"
-                                filterKey="filter-year"
-                                selectedValues={selectedFilters['filter-year']}
-                                options={filters.find(f => f.id === 'filter-year')?.options || []}
-                                onRemove={handleRemoveTag}
-                            />
-                        )}
-                        {selectedFilters['filter-template'] !== "" && (
-                            <Tag
-                                label="Gabarito"
-                                filterKey="filter-template"
-                                selectedValues={[selectedFilters['filter-template']]} // Passa o valor como um array
-                                options={filters.find(f => f.id === 'filter-template')?.options || []}
-                                onRemove={handleRemoveTag}
-                            />
-                        )}
-                        {selectedFilters['filter-exibition'] != "" && (
-                            <Tag
-                                label="Forma de exibição"
-                                filterKey="filter-exibition"
-                                selectedValues={[selectedFilters['filter-exibition']]}
-                                options={filters.find(f => f.id === 'filter-exibition')?.options || []}
-                                onRemove={handleRemoveTag}
-                            />
-                        )} */}
+                    
                         {Object.entries(selectedFilters).map(([filterKey, selectedValue]) => {
-                            // Encontra o filtro correspondente
-                            const filter = filters.find(f => f.id === filterKey);
-
-                            // Verifica se o filtro existe e se há valores selecionados
-                            if (!filter || (Array.isArray(selectedValue) && selectedValue.length === 0) || (!Array.isArray(selectedValue) && selectedValue === "")) {
-                                return null;
+                            if (Array.isArray(selectedValue) && selectedValue.length > 0) {
+                                return (
+                                    <Tag
+                                        key={filterKey}
+                                        label={filters.find(filter => filter.id === filterKey)?.label || ''}
+                                        filterKey={filterKey as keyof typeof selectedFilters}
+                                        selectedValues={selectedValue as string[]}
+                                        options={(filters.find(filter => filter.id === filterKey)?.options || [])}
+                                        onRemove={handleRemoveTag}
+                                    />
+                                );
+                            } else if (typeof selectedValue === 'string' && selectedValue !== '') {
+                                return (
+                                    <Tag
+                                        key={filterKey}
+                                        label={filters.find(filter => filter.id === filterKey)?.label || ''}
+                                        filterKey={filterKey as keyof typeof selectedFilters}
+                                        selectedValues={Array.isArray(selectedValue) ? selectedValue : [selectedValue]}
+                                        options={(filters.find(filter => filter.id === filterKey)?.options || [])}
+                                        onRemove={handleRemoveTag}
+                                    />
+                                );
                             }
-
-                            // Gera as tags dinamicamente
-                            return (
-                                <Tag
-                                    key={filterKey}
-                                    label={filter.label}
-                                    filterKey={filterKey as keyof typeof selectedFilters}
-                                    selectedValues={
-                                        Array.isArray(selectedValue) 
-                                        ? (selectedValue as string[]).filter((val) => typeof val === 'string') 
-                                        : (typeof selectedValue === 'string' ? [selectedValue] : [])
-                                    }
-                                    options={filter.options}
-                                    onRemove={handleRemoveTag}
-                                />
-                            );
+                            return null;
                         })}
-                        {}
                     </div>
                 </>
             )}
