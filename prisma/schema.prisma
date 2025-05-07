@@ -34,8 +34,8 @@ model Redacao {
   competencia_5 Int
   texto         String
   tema          String
-  Usuario       Usuario @relation(fields: [Usuario_id], references: [id])
-  Usuario_id    Int
+  usuario       Usuario @relation(fields: [usuario_id], references: [id])
+  usuario_id    Int
 
 }
 
@@ -43,8 +43,8 @@ model Resposta {
   id                     Int       @id @default(autoincrement())
   data                   DateTime
   id_alternativa_correta Int
-  Usuario                Usuario   @relation(fields: [Usuario_id], references: [id])
-  Usuario_id             Int
+  usuario                Usuario   @relation(fields: [usuario_id], references: [id])
+  usuario_id             Int
   questoes               Questao[]
 
 }
@@ -53,11 +53,12 @@ model Questao {
   id             Int         @id @default(autoincrement())
   texto_auxiliar String?
   pergunta        String
-  Respostas       Resposta  @relation(fields: [Respostas_id], references: [id])
-  Respostas_id    Int
+  respostas       Resposta  @relation(fields: [respostas_id], references: [id])
+  respostas_id    Int
   imagem_auxiliar String?
   alternativas    Alternativa[]
   disciplinas     Questoes_has_Disciplina[]
+  comentarios     Comentario[]
 
 }
 
@@ -66,10 +67,12 @@ model Comentario {
   descricao              String
   autor                  String
   data                   DateTime
-  Usuario                Usuario   @relation(fields: [Usuario_id], references: [id])
-  Usuario_id             Int
-  Comentarios_id         Int?
-  Comentarios_Usuario_id Int?
+  usuario                Usuario   @relation(fields: [usuario_id], references: [id])
+  questoes               Questao   @relation(fields: [questao_id], references: [id])
+  usuario_id             Int
+  questao_id             Int
+  comentarios_id         Int?
+  comentarios_Usuario_id Int?
 }
 
 model Disciplina {
@@ -79,21 +82,21 @@ model Disciplina {
 }
 
 model Questoes_has_Disciplina {
-  Questoes_id           Int
-  Questoes_Respostas_id Int
-  Disciplina_id         Int
+  questoes_id           Int
+  questoes_respostas_id Int
+  disciplina_id         Int
 
-  questao     Questao     @relation(fields: [Questoes_id], references: [id])
-  disciplina  Disciplina  @relation(fields: [Disciplina_id], references: [id])
+  questao     Questao     @relation(fields: [questoes_id], references: [id])
+  disciplina  Disciplina  @relation(fields: [disciplina_id], references: [id])
 
-  @@id([Questoes_id, Disciplina_id])
+  @@id([questoes_id, disciplina_id])
 }
 
 model Alternativa {
   id          Int     @id @default(autoincrement())
   letra       String
   texto       String
-  Questoes_id Int
+  questoes_id Int
   imagem_auxiliar String?
-  questao     Questao @relation(fields: [Questoes_id], references: [id])
+  questao     Questao @relation(fields: [questoes_id], references: [id])
 }
