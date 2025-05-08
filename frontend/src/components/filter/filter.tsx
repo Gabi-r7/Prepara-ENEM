@@ -125,7 +125,11 @@ function Filter() {
                                     <select
                                         id={filter.id}
                                         className="filter-select"
-                                        value={selectedFilters[filter.id as keyof typeof selectedFilters]} // Define o valor do select
+                                        value={
+                                            Array.isArray(selectedFilters[filter.id as keyof typeof selectedFilters])
+                                            ? '' // Define um valor padrão se for um array
+                                            : selectedFilters[filter.id as keyof typeof selectedFilters]
+                                        }
                                         onChange={handleSelectChange}
                                     >
                                         <option value="" disabled>

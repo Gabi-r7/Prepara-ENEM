@@ -19,7 +19,7 @@
 
 .tittle{
     color: black;
-    border-radius: 20px;
+    border-radius: var(--main-border-radius);
     width: 100%;
 }
 

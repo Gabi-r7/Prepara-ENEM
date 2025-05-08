@@ -18,9 +18,9 @@
 
 select{
     padding: 0.5rem;
-    border-radius: 0.5rem;
+    border-radius: var(--secondary-border-radius);
     border: 1px solid #ccc;
     font-size: 1rem;
-    background-color: #192633;
+    background-color: var(--input-background-color);
 }
 
