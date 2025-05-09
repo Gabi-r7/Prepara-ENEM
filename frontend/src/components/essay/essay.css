@@ -22,13 +22,13 @@
     border-radius: 0.75rem;
 }
 
-.motivating-text {
+.motivating-text, .essay-text {
     background-color: #051d35;
     padding: 1rem;
     border-radius: 0.75rem;
 }
 
-.motivating-text-tittle {
+.motivating-text-tittle, .essay-text-tittle {
     font-size: 1.5rem;
     font-weight: bold;
     color: #ffffff;
