@@ -34,13 +34,13 @@
     height: auto;
 }
 
-.motivating-text, .essay-text {
+.motivating-text, .essay-text, .theme-text {
     background-color: #051d35;
     padding: 1rem;
     border-radius: 0.75rem;
 }
 
-.motivating-text-tittle, .essay-text-tittle {
+.motivating-text-tittle, .essay-text-tittle, .theme-text-tittle {
     font-size: 1.5rem;
     font-weight: bold;
     color: #ffffff;
@@ -48,7 +48,7 @@
     text-align: center;
 }
 
-.motivating-text-content, .essay-text-content {
+.motivating-text-content, .essay-text-content, .theme-text-content {
     font-size: 1rem;
     color: #ffffff;
     text-align: justify;

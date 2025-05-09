@@ -2,6 +2,7 @@ import express from 'express';
 
 const routes = express.Router();
 
+//logi
 routes.post('/login', (req, res) => {
     const { email, password } = req.body;
     // Adicione a lógica de autenticação aqui
@@ -12,8 +13,13 @@ routes.post('/login', (req, res) => {
     }
 });
 
+//questoes
 routes.post('/questions', (req, res) => {
     const {filters} = req.body;
 });
+
+//redacao
+
+
 
 export default routes;
