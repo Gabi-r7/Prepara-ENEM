@@ -1,27 +1,26 @@
-.filter-container{
+.filter-container-select{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
     gap: 2rem;
     padding: 1rem;
-    grid-auto-flow: column;
 }
 
-.filter-label{
+.filter-container-select > div{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.filter-select-label{
     font-size: 1.3rem;
     font-weight: bold;
 }
 
-.filter-item{
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-}
-
 select{
     padding: 0.5rem;
-    border-radius: 0.5rem;
+    border-radius: var(--secondary-border-radius);
     border: 1px solid #ccc;
     font-size: 1rem;
-    background-color: #192633;
+    background-color: var(--input-background-color);
 }
+

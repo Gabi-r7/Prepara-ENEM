@@ -10,10 +10,16 @@
 .tittle-Home{
     background-color: var(--color-home);
 }
+.tittle-Question{
+    background-color: var(--color-question);
+}
+.tittle-Profile{
+    background-color: var(--color-profile);
+}
 
 .tittle{
     color: black;
-    border-radius: 20px;
+    border-radius: var(--main-border-radius);
     width: 100%;
 }
 

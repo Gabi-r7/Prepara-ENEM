@@ -9,6 +9,7 @@ import Filter from '../filter/filter'
 import Ranking from '../ranking/ranking'
 import Essay from '../essay/essay'
 import Footer from '../footer/footer'
+import Question from '../question/question'
 import Profile from '../profile/profile'
 
 createRoot(document.getElementById('root')!).render(
@@ -23,11 +24,12 @@ createRoot(document.getElementById('root')!).render(
             <Route path="/filter" element={<Filter />} />
             <Route path="/essay" element={<Essay />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/Question" element={<Question />}/>
             <Route path="/profile" element={<Profile />} />
           </Routes>
           <Footer/>
         </div>
       </div>
     </Router>
-  </StrictMode>,
+  </StrictMode>
 )

@@ -1,0 +1,37 @@
+.btn-generate {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 1em 2em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    margin: 0.25em 0.125em;
+    cursor: pointer;
+    border-radius: 0.75em;
+    width: 100%;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: #445e7a;
+    border-radius: 0.75rem;
+}
+
+.motivating-text, .essay-text {
+    background-color: #051d35;
+    padding: 1rem;
+    border-radius: 0.75rem;
+}
+
+.motivating-text-tittle, .essay-text-tittle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}

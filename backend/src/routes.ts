@@ -12,4 +12,8 @@ routes.post('/login', (req, res) => {
     }
 });
 
+routes.post('/questions', (req, res) => {
+    const {filters} = req.body;
+});
+
 export default routes;
