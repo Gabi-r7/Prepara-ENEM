@@ -31,5 +31,5 @@ createRoot(document.getElementById('root')!).render(
         </div>
       </div>
     </Router>
-  </StrictMode>,
+  </StrictMode>
 )
