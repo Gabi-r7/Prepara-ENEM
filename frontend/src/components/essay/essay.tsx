@@ -15,15 +15,14 @@ function Essay() {
                     <div className="essay-text">
                         <h2 className="essay-text-tittle">Digite seu texto: </h2>
                         <div className='show-essay-paper'> 
-                            <div className="essay-paper-content" >
+                            <div className="essay-paper-content" contentEditable="true">
 
                             </div>
-                        
                         </div>
                     </div>
                 </div>
                 <div className='ads'>
-                    rapaiz
+                    
                 </div>
             </div> 
         </>
