@@ -109,8 +109,8 @@ nav .navbar {
 }
 
 #hidde-menu-bt:hover{
-    right: -0.7rem;
-    width: calc(var(--hidde-menu-bt-width) + 0.7rem);
+    right: -0.5rem;
+    width: calc(var(--hidde-menu-bt-width) + 0.5rem);
     transition: var(--fast-trasition);
 }
 
