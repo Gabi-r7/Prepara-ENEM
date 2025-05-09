@@ -1,0 +1,102 @@
+datasource db {
+  url      = env("DATABASE_URL")
+  provider = "sqlite"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Usuario {
+  id        Int      @id @default(autoincrement())
+  login     String   @unique
+  email     String   @unique
+  senha     String   
+  experiencia Float? @default(0)
+  imagem_perfil String @default("/frontend/public/defaultProfileImage.jpg")
+  disciplina_favorita String?
+  redacoes            Redacao[]
+  respostas           Resposta[]
+  comentarios         Comentario[]
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+}
+
+model Redacao {
+  id           Int      @id @default(autoincrement())
+  data         DateTime
+  competencia_1 Int
+  competencia_2 Int
+  competencia_3 Int
+  competencia_4 Int
+  competencia_5 Int
+  texto         String
+  tema          String
+  usuario       Usuario @relation(fields: [usuario_id], references: [id])
+  usuario_id    Int
+
+}
+
+model Resposta {
+  id                     Int       @id @default(autoincrement())
+  data                   DateTime
+  id_alternativa_correta Int
+  usuario                Usuario   @relation(fields: [usuario_id], references: [id])
+  usuario_id             Int
+  questoes               Questao[]
+
+}
+
+model Questao {
+  id             Int         @id @default(autoincrement())
+  texto_auxiliar String?
+  pergunta        String
+  respostas       Resposta  @relation(fields: [respostas_id], references: [id])
+  respostas_id    Int
+  imagem_auxiliar String?
+  alternativas    Alternativa[]
+  disciplinas     Questoes_has_Disciplina[]
+  comentarios     Comentario[]
+
+}
+
+model Comentario {
+  id                     Int       @id @default(autoincrement())
+  descricao              String
+  autor                  String
+  data                   DateTime
+  usuario                Usuario   @relation(fields: [usuario_id], references: [id])
+  questoes               Questao   @relation(fields: [questao_id], references: [id])
+  usuario_id             Int
+  questao_id             Int
+  comentarios_id         Int?
+  comentarios_Usuario_id Int?
+}
+
+model Disciplina {
+  id       Int                      @id @default(autoincrement())
+  nome     String
+  questoes Questoes_has_Disciplina[]
+}
+
+model Questoes_has_Disciplina {
+  questoes_id           Int
+  questoes_respostas_id Int
+  disciplina_id         Int
+
+  questao     Questao     @relation(fields: [questoes_id], references: [id])
+  disciplina  Disciplina  @relation(fields: [disciplina_id], references: [id])
+
+  @@id([questoes_id, disciplina_id])
+}
+
+model Alternativa {
+  id          Int     @id @default(autoincrement())
+  letra       String
+  texto       String
+  questoes_id Int
+  imagem_auxiliar String?
+  questao     Questao @relation(fields: [questoes_id], references: [id])
+}
