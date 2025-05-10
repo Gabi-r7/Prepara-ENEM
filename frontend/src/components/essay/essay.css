@@ -40,7 +40,7 @@
     border-radius: 0.75rem;
 }
 
-.motivating-text-tittle, .essay-text-tittle, .theme-text-tittle {
+.motivating-text-title, .essay-text-title, .theme-text-title {
     font-size: 1.5rem;
     font-weight: bold;
     color: #ffffff;
@@ -62,7 +62,7 @@
 }
 
 /* essay-text */
-.show-essay-paper {
+.show-essay-text {
     display: flex;
     gap: 1rem;
     padding: 1rem;
@@ -73,7 +73,7 @@
     min-width: fit-content;
 }
 
-.essay-paper-content {
+.essay-text-content {
     background-image: url('/essay-background.jpg');
     background-size: 100% 100%, 100% 100%, 100%;
     border: 1px solid #ccc;
