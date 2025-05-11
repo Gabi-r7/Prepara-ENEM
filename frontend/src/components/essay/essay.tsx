@@ -37,8 +37,6 @@ function Essay() {
                 }),
             });
             const data = await response.json();
-            console.log(data);
-            console.log('feedback:', data.feedback);
             
             const feedbackContent = document.querySelector('.feedback-content');
             if (feedbackContent) {

@@ -189,17 +189,17 @@ export async function processEssay(theme, text) {
         // console.log("response:", response);
         // console.log("response.text:", response.text);
         // Exporta o texto final para um arquivo Markdown
-        const outputFilePath = path.join(process.cwd(), "resultado_avaliacao.md");
-        try {
-            if (response && response.text) {
-                await fs.writeFile(outputFilePath, response.text, "utf8");
-                console.log(`Texto final exportado para: ${outputFilePath}`);
-            } else {
-                console.log("Nenhum texto foi gerado para exportar.");
-            }
-        } catch (writeError) {
-            console.error("Erro ao exportar o texto para o arquivo Markdown:", writeError);
-        }
+        // const outputFilePath = path.join(process.cwd(), "resultado_avaliacao.md");
+        // try {
+        //     if (response && response.text) {
+        //         await fs.writeFile(outputFilePath, response.text, "utf8");
+        //         console.log(`Texto final exportado para: ${outputFilePath}`);
+        //     } else {
+        //         console.log("Nenhum texto foi gerado para exportar.");
+        //     }
+        // } catch (writeError) {
+        //     console.error("Erro ao exportar o texto para o arquivo Markdown:", writeError);
+        // }
         return response.text;
 
     } catch (error) {
