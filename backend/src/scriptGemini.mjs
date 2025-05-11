@@ -2,16 +2,12 @@ import { promises as fs } from "fs"; // Usar a versão baseada em Promises
 import path from "path";
 import mime from "mime-types"; // Você já tinha este
 import { createPartFromUri, GoogleGenAI } from "@google/genai";
-import dotenv from "dotenv";
+import { apiKey } from "../../apiKey.js";
 import { fileURLToPath } from 'url';
 
 // Substituir __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
-dotenv.config({ path: path.resolve(__dirname, "../../.env") });
-
-const apiKey = process.env.API_KEY;
 
 // Certifique-se de ter o mime-types instalado: npm install mime-types
 // Se ainda não tiver, rode: npm install @google/genai mime-types
