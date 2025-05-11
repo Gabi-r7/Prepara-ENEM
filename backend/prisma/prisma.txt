@@ -3,8 +3,11 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 // use `prisma` in your application to read and write data in your DB
 
-
+--- QUALQUER AÇÃO DO PRISMA PRECISA ESTAR NUMA ASYNC FUNCTION ---
 // run inside `async` function
+
+--- CRIAR USUARIO ---
+
 const newUser = await prisma.user.create({
   data: {
     name: 'Alice',
@@ -12,4 +15,13 @@ const newUser = await prisma.user.create({
   },
 })
 
+--- GET DE TODOS OS USUARIOS ---
+
 const users = await prisma.user.findMany()
+
+--- EXEMPLO DE ROTA ---
+
+// Rota teste para verificar se o Prisma está funcionando
+routes.get('/test', async (req, res) => {
+    res.send(await prisma.usuario.findMany());
+});
