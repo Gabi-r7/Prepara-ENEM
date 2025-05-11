@@ -8,7 +8,7 @@
     align-items: flex-start;
 }
 
-.btn-generate {
+.btn-generate, .btn-essay {
     background-color: #4CAF50; /* Green */
     border: none;
     color: white;
@@ -34,13 +34,13 @@
     height: auto;
 }
 
-.motivating-text, .essay-text, .theme-text {
+.motivating-text, .essay-text, .theme-text, .feedback {
     background-color: #051d35;
     padding: 1rem;
     border-radius: 0.75rem;
 }
 
-.motivating-text-title, .essay-text-title, .theme-text-title {
+.motivating-text-title, .essay-text-title, .theme-text-title, .feedback-title {
     font-size: 1.5rem;
     font-weight: bold;
     color: #ffffff;
@@ -48,7 +48,7 @@
     text-align: center;
 }
 
-.motivating-text-content, .essay-text-content, .theme-text-content {
+.motivating-text-content, .essay-text-content, .theme-text-content, .feedback-content {
     font-size: 1rem;
     color: #ffffff;
     text-align: justify;

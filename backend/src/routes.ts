@@ -1,4 +1,5 @@
 import express from 'express';
+const { processEssay } = require('./scriptGemini.mjs');
 
 const routes = express.Router();
 
@@ -19,7 +20,12 @@ routes.post('/questions', (req, res) => {
 });
 
 //redacao
+routes.post('/essay/send-essay', async (req, res) => {
+    const { essayText, themeText } = req.body;
+    const feedback = await processEssay(essayText, themeText);
+    console.log('feedback:', feedback);
 
-
+    res.status(200).json({ feedback });
+});
 
 export default routes;
