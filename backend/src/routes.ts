@@ -1,4 +1,6 @@
 import express from 'express';
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient();
 
 const routes = express.Router();
 
@@ -14,6 +16,11 @@ routes.post('/login', (req, res) => {
 
 routes.post('/questions', (req, res) => {
     const {filters} = req.body;
+});
+
+// Rota teste para verificar se o Prisma está funcionando
+routes.get('/test', async (req, res) => {
+    res.send(await prisma.usuario.findMany());
 });
 
 export default routes;
