@@ -1,5 +1,7 @@
 import express from 'express';
 const { processEssay } = require('./scriptGemini.mjs');
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient();
 
 const routes = express.Router();
 
@@ -26,6 +28,11 @@ routes.post('/essay/send-essay', async (req, res) => {
     console.log('feedback:', feedback);
 
     res.status(200).json({ feedback });
+});
+
+// Rota teste para verificar se o Prisma está funcionando
+routes.get('/test', async (req, res) => {
+    res.send(await prisma.usuario.findMany());
 });
 
 export default routes;
