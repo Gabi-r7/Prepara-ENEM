@@ -14,6 +14,7 @@ model Usuario {
   senha     String   
   experiencia Float? @default(0)
   imagem_perfil String @default("/frontend/public/defaultProfileImage.jpg")
+  imagem_fundo_perfil String @default("/frontend/public/profile/background/defaultProfileImage.jpg")
   disciplina_favorita String?
   redacoes            Redacao[]
   respostas           Resposta[]
