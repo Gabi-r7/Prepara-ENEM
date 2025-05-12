@@ -24,7 +24,7 @@ routes.post('/questions', (req, res) => {
 //redacao
 routes.post('/essay/send-essay', async (req, res) => {
     const { essayText, themeText } = req.body;
-    const feedback = await processEssay(essayText, themeText);
+    const feedback = await processEssay(themeText, essayText);
     console.log('feedback:', feedback);
 
     res.status(200).json({ feedback });

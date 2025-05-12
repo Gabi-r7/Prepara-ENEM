@@ -74,6 +74,8 @@ async function uploadLocalPDF(filePath, displayName) {
 }
 
 export async function processEssay(theme, text) {
+    console.log('text: ', text);
+    console.log('theme: ', theme);
     try {
         const content = [
              { text: "Use o seguinte contexto para avaliar o texto abaixo de acordo com as competências do ENEM, o tema é:", theme }
@@ -205,5 +207,60 @@ export async function processEssay(theme, text) {
         }
     }
 }
+
+export async function generateRandomTheme() {
+    try {
+        // Instrução detalhada para o modelo
+        const prompt = `
+        **Instrução para Geração de Tema e Textos Motivadores:**
+
+        Você é um especialista em redação do ENEM. Sua tarefa é gerar um tema aleatório para uma redação, seguido de três textos motivadores relacionados ao tema. Os textos motivadores devem ser informativos, baseados em dados reais ou fictícios, e devem ajudar o aluno a refletir sobre o tema.
+
+        **Formato da Resposta Obrigatório:**
+
+        ---
+        ### **Tema da Redação**
+        [Título do tema gerado aqui]
+
+        ### **Textos Motivadores**
+        1. [Texto motivador 1]
+        2. [Texto motivador 2]
+        3. [Texto motivador 3]
+        ---
+
+        Certifique-se de que o tema seja relevante e atual, e que os textos motivadores sejam claros, objetivos e úteis para o desenvolvimento da redação.
+        `;
+
+        // Configuração do conteúdo para o modelo
+        const content = [{ text: prompt }];
+
+        console.log("Solicitando tema e textos motivadores ao Gemini...");
+
+        // Enviando a solicitação ao modelo Gemini
+        const requestPayload = [{ role: "user", parts: content }];
+        const result = await ai.models.generateContent({
+            model: "gemini-1.5-flash",
+            contents: requestPayload,
+        });
+
+        const response = result;
+
+        // Verifica se a resposta foi gerada
+        if (response && response.text) {
+            console.log("\n--- Tema e Textos Motivadores Gerados ---");
+            console.log(response.text);
+            return response.text; // Retorna o texto gerado
+        } else {
+            console.warn("Nenhum texto foi gerado pelo modelo.");
+            return null;
+        }
+    } catch (error) {
+        console.error("\n--- Erro ao gerar tema e textos motivadores ---", error);
+        throw error;
+    }
+}
+
+const themeAndMotivators = generateRandomTheme();
+console.log("Resultado:", themeAndMotivators);
 
 console.log("Script Gemini inicializado");

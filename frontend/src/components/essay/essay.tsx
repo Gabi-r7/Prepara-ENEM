@@ -17,12 +17,15 @@ function Essay() {
                 method: 'GET', 
                 headers: {
                     'Content-Type': 'application/json',
-                },
+                }, 
             });
+            const data = await response.json();
+            const themeContent = document.getElementById('theme-text-content');
+            const motivatingContent = document.getElementById('motivating-text-content');
         };
 
         async function handleSendEssay() {
-            let essayText = document.getElementById('essay-text-content')?.innerHTML;
+            let essayText = document.getElementById('essay-text-content')?.textContent;
             let themeText = document.getElementById('theme-text-content')?.innerHTML;
             //user info will be added here
             const response = await fetch(`${url}/essay/send-essay`, {
