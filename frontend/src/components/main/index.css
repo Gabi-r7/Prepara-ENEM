@@ -26,6 +26,10 @@
   --nav-width: calc(var(--navbar-width) + var(--main-padding) + var(--hidde-menu-bt-width));
   --navbar-width: 18rem;
   --nav-small-width: calc(var(--main-padding)*3 + var(--icon-nav-width) + var(--hidde-menu-bt-width) + 0.5rem);
+
+  /* profile */
+
+  --profile-backgound-edit-width: 3rem;
   
   /* color */
   

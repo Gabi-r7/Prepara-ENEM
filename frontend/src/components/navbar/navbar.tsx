@@ -32,10 +32,8 @@ function Navbar() {
       setIsNavHidden(windowWidth < threshold);
     };
 
-    // Adiciona o evento de resize
     window.addEventListener('resize', handleResize);
 
-    // Chama a função uma vez para verificar o estado inicial
     handleResize();
 
     // Remove o evento ao desmontar o componente
