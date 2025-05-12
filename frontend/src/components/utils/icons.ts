@@ -23,6 +23,7 @@ const icons = {
     Checked: FaCheck,
     DoubleArrowRight: MdKeyboardDoubleArrowRight,
     DoubleArrowLeft: MdKeyboardDoubleArrowLeft,
+    SignUp: MdKeyboardDoubleArrowLeft
 };
 
 export default icons;
