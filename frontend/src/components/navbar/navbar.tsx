@@ -15,7 +15,7 @@ function Navbar() {
   }
 
   const navItems = [
-    { path: '/', text: 'Inicio', icon: icons.Home , id: 'home'},
+    { path: '/home', text: 'Inicio', icon: icons.Home , id: 'home'},
     { path: '/ranking', text: 'Ranking', icon: icons.Ranking , id: 'ranking'},
     { path: '/filter', text: 'Questões', icon: icons.Filter , id: 'questions'},
     { path: '/essay', text: 'Redações', icon: icons.Essay , id: 'essay'},
