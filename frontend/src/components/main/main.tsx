@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
@@ -12,24 +12,38 @@ import Footer from '../footer/footer'
 import Question from '../question/question'
 import Profile from '../profile/profile'
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <Router>
+function App() {
+  const location = useLocation(); // Hook para obter a URL atual
+
+  // Verifica se a página atual é "introdução" (substitua "/introducao" pelo caminho correto)
+  const isIntroductionPage = location.pathname == '/';
+
+  return (
+    <>
       <div className="app-container">
-        <Navbar />
+        {!isIntroductionPage && <Navbar />}
         <div className="main-content">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/ranking" element={<Ranking />} />
             <Route path="/filter" element={<Filter />} />
             <Route path="/essay" element={<Essay />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/Question" element={<Question />}/>
+            <Route path="/Question" element={<Question />} />
             <Route path="/profile" element={<Profile />} />
           </Routes>
-          <Footer/>
+          <Footer />
         </div>
       </div>
+    </>
+  );
+}
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <Router>
+      <App />
     </Router>
   </StrictMode>
 )
