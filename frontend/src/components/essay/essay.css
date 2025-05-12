@@ -1,0 +1,90 @@
+.all-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100vh;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.btn-generate, .btn-essay {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 1em 2em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    margin: 0.25em 0.125em;
+    cursor: pointer;
+    border-radius: 0.75em;
+    width: 100%;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: #445e7a;
+    border-radius: 0.75rem;
+    width: 80%;
+    height: auto;
+}
+
+.motivating-text, .essay-text, .theme-text, .feedback {
+    background-color: #051d35;
+    padding: 1rem;
+    border-radius: 0.75rem;
+}
+
+.motivating-text-title, .essay-text-title, .theme-text-title, .feedback-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.motivating-text-content, .essay-text-content, .theme-text-content, .feedback-content {
+    font-size: 1rem;
+    color: #ffffff;
+    text-align: justify;
+}
+
+.ads {
+    display: flex;
+    background-color: white;
+    width: 15vw;
+    height: 80vh;
+}
+
+/* essay-text */
+.show-essay-text {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    width: auto;
+    height: auto;
+    justify-content: center;
+    min-width: fit-content;
+}
+
+.essay-text-content {
+    background-image: url('/essay-background.jpg');
+    background-size: 100% 100%, 100% 100%, 100%;
+    border: 1px solid #ccc;
+    border-radius: 0.75rem;
+    width: 750px;
+    height: 949px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    line-height: 31px;
+    padding: 8px 29px;
+    font-size: 18.5px;
+    min-width: 750px;
+    
+    color: black;
+}

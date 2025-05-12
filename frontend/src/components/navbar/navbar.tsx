@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react';
 import './navbar.css'
 import icons from '../utils/icons';
 
 function Navbar() {
+  const [isNavHidden, setIsNavHidden] = useState(false);
 
   const logo = {
     name: 'logo',
@@ -19,23 +21,59 @@ function Navbar() {
     { path: '/profile', text: 'Perfil', icon: icons.Profile , id: 'profile'},
   ];
 
+  const handleHiddenMenu = () => {
+    setIsNavHidden((prev) => !prev);
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      const windowWidth = window.innerWidth;
+      const threshold = window.screen.width * 0.6; // 70% do tamanho da tela
+      setIsNavHidden(windowWidth < threshold);
+    };
+
+    // Adiciona o evento de resize
+    window.addEventListener('resize', handleResize);
+
+    // Chama a função uma vez para verificar o estado inicial
+    handleResize();
+
+    // Remove o evento ao desmontar o componente
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <>
-      <nav>
-        <div className="window">
+      <nav className={isNavHidden ? 'hidden-navbar' : ''}>
+        <div className="window navbar">
           <div id="logo">
             <Link to="/">
               <img src={logo.src} alt={logo.alt} />
             </Link>
           </div>
           <div id="links">
-            {navItems.map((item, index) => (
-              <div key={index}>
-                <label htmlFor={`${item.id}-link`} className="nav-icon">{item.icon && <item.icon />}</label>
-                <Link to={item.path} id={`${item.id}-link`}>{item.text}</Link>
-              </div>
-            ))}
-          </div>
+          {navItems.map((item) => (
+            <Link to={item.path} id={`${item.id}-link`} className="link" key={item.id}>
+              <span className="nav-icon">{item.icon && <item.icon />}</span>
+              <span className="text-link">{item.text}</span>
+            </Link>
+          ))}
+        </div>
+        </div>
+        <div id="hidde-menu-bt" onClick={handleHiddenMenu}>
+          <label>
+            {isNavHidden ? (
+              <span>
+                <icons.DoubleArrowRight className="hidde-menu-icon" />
+              </span>
+            ) : (
+              <span>
+                <icons.DoubleArrowLeft className="hidde-menu-icon" />
+              </span>
+            )}
+          </label>
         </div>
       </nav>
     </>

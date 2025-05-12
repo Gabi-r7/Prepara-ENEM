@@ -6,6 +6,8 @@ import { MdLiveHelp }  from "react-icons/md";
 import { BiLogIn } from "react-icons/bi";
 import { GrCheckboxSelected } from "react-icons/gr";
 import { FaCheck } from "react-icons/fa";
+import { MdKeyboardDoubleArrowRight } from "react-icons/md";
+import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
 
 const icons = {
     Filter: FaFilter,
@@ -19,6 +21,8 @@ const icons = {
     Home: FaHome,
     Checkbox: GrCheckboxSelected,
     Checked: FaCheck,
+    DoubleArrowRight: MdKeyboardDoubleArrowRight,
+    DoubleArrowLeft: MdKeyboardDoubleArrowLeft,
 };
 
 export default icons;
