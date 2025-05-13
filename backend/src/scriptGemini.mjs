@@ -260,7 +260,7 @@ export async function generateRandomTheme() {
     }
 }
 
-const themeAndMotivators = generateRandomTheme();
-console.log("Resultado:", themeAndMotivators);
+// const themeAndMotivators = generateRandomTheme();
+// console.log("Resultado:", themeAndMotivators);
 
 console.log("Script Gemini inicializado");
