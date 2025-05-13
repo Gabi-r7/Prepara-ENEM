@@ -16,6 +16,10 @@
   "dependencies": {
     "@prisma/client": "^6.7.0",
     "cors": "^2.8.5",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "@google/genai": "^0.7.0",
+    "@google/generative-ai": "^0.24.0",
+    "dotenv": "^16.4.7",
+    "mime-types": "^3.0.1"
   }
 }
