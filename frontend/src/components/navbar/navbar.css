@@ -109,20 +109,110 @@ nav .navbar {
 }
 
 #hidde-menu-bt:hover{
-    right: -0.7rem;
-    width: calc(var(--hidde-menu-bt-width) + 0.7rem);
+    right: -0.5rem;
+    width: calc(var(--hidde-menu-bt-width) + 0.5rem);
     transition: var(--fast-trasition);
+}
+
+/* mobile-navbar */
+
+.open-mobile-navbar{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.411);
+    transition: var(--main-trasition) 0.05s;
+    padding-right: calc(var(--hidde-menu-bt-width) + 1rem);
+}
+
+.open-mobile-navbar #logo{
+    display: none;
+}
+
+.open-mobile-navbar .navbar{
+    width: 100%;
+    height: auto;
+}
+
+.open-mobile-navbar #links {
+    width: 100%;
+    height: auto;
+    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.open-mobile-navbar #hidde-menu-bt{
+    right: 1rem;
+}
+
+.open-mobile-navbar + .main-content{
+    margin-left: var(--hidde-menu-bt-width);
+}
+
+/* minimal-navbar */
+
+.minimal-navbar{
+    width: 0;
+    padding: 0;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    transition: var(--main-trasition);
+    padding-right: calc(var(--hidde-menu-bt-width) + 1rem);
+    min-width: var(--hidde-menu-bt-width);
+    position: fixed;
+}
+
+.minimal-navbar #logo{
+    display: none;
+}
+
+.minimal-navbar .navbar{
+    width: 0;
+    height: auto;
+    padding: 0;
+    transition: var(--main-trasition); 
+}
+
+.minimal-navbar #links {
+    width: 0;
+    padding: 0;
+    height: auto;
+    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: var(--main-trasition);
+}
+
+.minimal-navbar #hidde-menu-bt{
+    right: 1rem;
+}
+
+.minimal-navbar + .main-content{
+    margin-left: var(--hidde-menu-bt-width);
 }
 
 /* hidden-nav */
 
+.hidden-navbar{
+    transition: var(--main-trasition);
+}
+
 .hidden-navbar .navbar{
     width: calc(var(--main-padding)*2 + var(--icon-nav-width));
-    transition: width var(--main-trasition);
+    transition: var(--main-trasition);
     justify-content: center;
 }
 
 .hidden-navbar #logo{
     width: 0;
     padding: 0;
+}
+
+.hidden-navbar #hidde-menu-bt{
+    /* right: 0rem; */
+    transition: var(--main-trasition) 0.05s;
 }
