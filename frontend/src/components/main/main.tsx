@@ -20,6 +20,7 @@ createRoot(document.getElementById('root')!).render(
         <div className="main-content">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/ranking" element={<Ranking />} />
             <Route path="/filter" element={<Filter />} />
             <Route path="/essay" element={<Essay />} />
