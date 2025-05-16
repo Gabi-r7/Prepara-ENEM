@@ -1,5 +1,6 @@
 import express from 'express';
 const { processEssay } = require('./scriptGemini.mjs');
+const { generateRandomTheme } = require('./scriptGemini.mjs');
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
@@ -28,6 +29,14 @@ routes.post('/essay/send-essay', async (req, res) => {
     console.log('feedback:', feedback);
 
     res.status(200).json({ feedback });
+});
+
+routes.get('/essay/generate-theme', async (req, res) => {
+    const themeAndMotivatingText = await generateRandomTheme();
+    const theme = themeAndMotivatingText.theme;
+    const motivatingText = themeAndMotivatingText.motivators;
+    
+    res.status(200).json({ "theme": theme, "motivatingText": motivatingText });
 });
 
 // Rota teste para verificar se o Prisma está funcionando

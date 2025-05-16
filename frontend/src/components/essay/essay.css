@@ -48,10 +48,16 @@
     text-align: center;
 }
 
-.motivating-text-content, .essay-text-content, .theme-text-content, .feedback-content {
+.motivating-text-content, .essay-text-content, .feedback-content {
     font-size: 1rem;
     color: #ffffff;
     text-align: justify;
+}
+
+.theme-text-content {
+    font-size: 1rem;
+    color: #ffffff;
+    text-align: center;
 }
 
 .ads {

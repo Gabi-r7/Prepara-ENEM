@@ -4,24 +4,25 @@ import url from '../../url.ts';
 import { marked } from 'marked';
 
 function Essay() {
-    document.addEventListener('DOMContentLoaded', () => {
-        const generateButton = document.getElementById("theme-generate-button");
-        const themeTitle = document.getElementById("theme-text-title");
-        const themeContent = document.getElementById("theme-text-content");
-        const essayContent = document.getElementById("essay-text-content");
-        const motivatingContent = document.getElementById("motivating-text-content");
-        });
-
         async function handleGenerateTheme() {
-            const response = await fetch('/essay/generate-theme', {
+            const response = await fetch(`${url}/essay/generate-theme`, {
                 method: 'GET', 
                 headers: {
                     'Content-Type': 'application/json',
                 }, 
             });
             const data = await response.json();
+            console.log('data.theme:', data.theme);
+            console.log('data.motivatingText:', data.motivatingText);
             const themeContent = document.getElementById('theme-text-content');
             const motivatingContent = document.getElementById('motivating-text-content');
+            if (themeContent) {
+                themeContent.innerHTML = await marked(data.theme);
+            }
+            if (motivatingContent) {
+                console.log('entrou no motivatingContent');
+                motivatingContent.innerHTML = await marked(data.motivatingText);
+            }
         };
 
         async function handleSendEssay() {
@@ -60,7 +61,7 @@ function Essay() {
                     </div>
                     <div className="motivating-text">
                         <h2 className="motivating-text-title">Textos motivadores</h2>
-                        <p className="motivating-text-content">Texto motivador aqui</p>
+                        <p id='motivating-text-content' className="motivating-text-content">Texto motivador aqui</p>
                     </div>
                     <div className="essay-text">
                         <h2 className="essay-text-title">Digite seu texto: </h2>

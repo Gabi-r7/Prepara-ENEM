@@ -228,35 +228,47 @@ export async function generateRandomTheme() {
         3. [Texto motivador 3]
         ---
 
-        Certifique-se de que o tema seja relevante e atual, e que os textos motivadores sejam claros, objetivos e úteis para o desenvolvimento da redação.
+        Certifique-se de que o tema seja relevante, e que os textos motivadores sejam claros, objetivos e úteis para o desenvolvimento da redação.
         `;
 
         // Configuração do conteúdo para o modelo
         const content = [{ text: prompt }];
 
-        console.log("Solicitando tema e textos motivadores ao Gemini...");
-
         // Enviando a solicitação ao modelo Gemini
         const requestPayload = [{ role: "user", parts: content }];
-        const result = await ai.models.generateContent({
+        const response = await ai.models.generateContent({
             model: "gemini-1.5-flash",
             contents: requestPayload,
         });
 
-        const response = result;
-
-        // Verifica se a resposta foi gerada
-        if (response && response.text) {
-            console.log("\n--- Tema e Textos Motivadores Gerados ---");
-            console.log(response.text);
-            return response.text; // Retorna o texto gerado
+        const result = await splitThemeAndMotivators(response.text);
+        if (result) {
+            return result;
         } else {
-            console.warn("Nenhum texto foi gerado pelo modelo.");
+            console.error("Erro ao processar a resposta do modelo.");
             return null;
         }
     } catch (error) {
         console.error("\n--- Erro ao gerar tema e textos motivadores ---", error);
         throw error;
+    }
+}
+
+export async function splitThemeAndMotivators(responseText) {
+    // Regex para capturar o tema e os textos motivadores juntos
+    const themeRegex = /###\s+\*\*Tema da Redação\*\*\s+([^\n]+)/;
+    const motivatorsRegex = /###\s+\*\*Textos Motivadores\*\*\s+([\s\S]+?)---/;
+
+    const themeMatch = responseText.match(themeRegex);
+    const motivatorsMatch = responseText.match(motivatorsRegex);
+
+    if (themeMatch && motivatorsMatch) {
+        const theme = themeMatch[1].trim();
+        const motivators = motivatorsMatch[1].trim(); // Não separa, mantém tudo junto
+        return { theme, motivators };
+    } else {
+        console.error("Formato inesperado na resposta do modelo.");
+        return null;
     }
 }
 
