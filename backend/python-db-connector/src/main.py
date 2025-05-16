@@ -19,10 +19,32 @@ def insert_question(data, db_path=None):
         db.execute_query("INSERT INTO Ano (ano) VALUES (?)", (ano_valor,))
         ano_id = db.execute_query("SELECT last_insert_rowid()").fetchone()[0]
 
-    # 1. Inserir Questao (agora com ano_id)
+    # 1. Inserir Questao (agora com todos os campos do novo schema)
     db.execute_query(
-        "INSERT INTO Questao (texto_auxiliar, pergunta, imagem_auxiliar, ano_id) VALUES (?, ?, ?, ?)",
-        (data.get("context"), data.get("alternativesIntroduction"), None, ano_id)
+        """
+        INSERT INTO Questao (
+            title, 
+            "index", 
+            discipline, 
+            language, 
+            year, 
+            context, 
+            alternativesIntroduction, 
+            correctAlternative, 
+            ano_id
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """,
+        (
+            data.get("title"),
+            data.get("index"),
+            data.get("discipline"),
+            data.get("language"),
+            data.get("year"),
+            data.get("context"),
+            data.get("alternativesIntroduction"),
+            data.get("correctAlternative"),
+            ano_id
+        )
     )
     questao_id = db.execute_query("SELECT last_insert_rowid()").fetchone()[0]
 
@@ -41,19 +63,24 @@ def insert_question(data, db_path=None):
         (questao_id, disciplina_id)
     )
 
-    # 4. Inserir arquivos (Files)
+    # 4. Inserir arquivos (File)
     for file_url in data.get("files", []):
         db.execute_query(
-            "INSERT INTO Files (file_path, question_id) VALUES (?, ?)",
+            "INSERT INTO File (url, questao_id) VALUES (?, ?)",
             (file_url, questao_id)
         )
 
     # 5. Inserir alternativas
     for alt in data.get("alternatives", []):
-        alt = {k: v for k, v in alt.items() if k != "id"}
         db.execute_query(
-            "INSERT INTO Alternativa (letra, texto, questoes_id, imagem_auxiliar, e_correta) VALUES (?, ?, ?, ?, ?)",
-            (alt["letter"], alt["text"], questao_id, alt.get("file"), alt.get("isCorrect", False))
+            "INSERT INTO Alternativa (letter, text, file, isCorrect, questao_id) VALUES (?, ?, ?, ?, ?)",
+            (
+                alt["letter"],
+                alt["text"],
+                alt.get("file"),
+                int(alt.get("isCorrect", False)),  # SQLite espera 0/1 para boolean
+                questao_id
+            )
         )
 
     db.disconnect()

@@ -17,7 +17,7 @@ routes.post('/login', (req, res) => {
 });
 
 //questoes
-routes.post('/questions', async (req:any, res:any) => {
+routes.post('/questions', async (req: any, res: any) => {
     const { year } = req.body;
 
     const ano = await prisma.ano.findFirst({
@@ -29,7 +29,15 @@ routes.post('/questions', async (req:any, res:any) => {
 
     const questoes = await prisma.questao.findMany({
         where: { ano_id: ano.id },
-        include: { alternativas: true }
+        include: {
+            alternativas: true,
+            files: true,
+            disciplinas: {
+                include: {
+                    disciplina: true
+                }
+            }
+        }
     });
 
     res.json({ ano, questoes });

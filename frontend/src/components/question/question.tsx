@@ -1,8 +1,17 @@
 import './questions.css'
 import Tittle from '../tittle/tittle';
 import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import ReactMarkdown from 'react-markdown';
+import Alternativa from '../alternative/alternative';
 
 function Question() {
+    const [selectedAlternativeId, setSelectedAlternativeId] = useState<number | null>(null);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     const location = useLocation();
     const data = location.state?.data;
     const ano = data?.ano;
@@ -20,37 +29,26 @@ function Question() {
     return (
         <>
             <Tittle page='Question'/>
-            <h2 className='window'>{`Ano - ${ano?.ano}`}</h2>
-            <div className="question-container window">
-                {questoes.map((questao: any) => (
-                    <div key={questao.id} className="questao-bloco">
-                        <h3>Questão {questao.id}</h3>
-                        <p>{questao.pergunta}</p>
-                        {questao.texto_auxiliar && (
-                            <div>
-                                <strong>Texto Auxiliar:</strong>
-                                <p>{questao.texto_auxiliar}</p>
-                            </div>
+            <h2 className='questions-year-tittle window'>{`Ano - ${ano?.ano}`}</h2>
+            <div className="questions-container">
+                {questoes.map((question: any) => (
+                    <div key={question.id} className="question window">
+                        <h2>{question.title}</h2>
+                        <ReactMarkdown>{question.context}</ReactMarkdown>
+                        {question.alternativesIntroduction && (
+                            <p><strong>{question.alternativesIntroduction}</strong></p>
                         )}
-                        {questao.imagem_auxiliar && (
-                            <div>
-                                <img src={questao.imagem_auxiliar} alt="Imagem auxiliar" />
-                            </div>
-                        )}
-                        <h4>Alternativas:</h4>
-                        <ul>
-                            {questao.alternativas?.map((alt: any) => (
-                                <li key={alt.id}>
-                                    <strong>{alt.letra}:</strong> {alt.texto}
-                                    {alt.imagem_auxiliar && (
-                                        <div>
-                                            <img src={alt.imagem_auxiliar} alt={`Imagem alternativa ${alt.letra}`} />
-                                        </div>
-                                    )}
-                                </li>
+                        <ul className="alternatives">
+                            {question.alternativas?.map((alt: any) => (
+                                <Alternativa
+                                    key={alt.id}
+                                    alt={alt}
+                                    questionId={question.id}
+                                    selectedAlternativeId={selectedAlternativeId}
+                                    onSelect={setSelectedAlternativeId}
+                                />
                             ))}
                         </ul>
-                        <hr />
                     </div>
                 ))}
             </div>
