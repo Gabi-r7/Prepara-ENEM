@@ -1,43 +1,59 @@
-import './questions.css';
+import './questions.css'
 import Tittle from '../tittle/tittle';
-import url from '../../url.ts';
-import { useState } from 'react';
-
-type QuestionType = {
-    id: number;
-    pergunta: string;
-    // adicione outros campos conforme necessário
-};
+import { useLocation } from 'react-router-dom';
 
 function Question() {
-    const [data, setData] = useState<QuestionType | null>(null);
+    const location = useLocation();
+    const data = location.state?.data;
+    const ano = data?.ano;
+    const questoes = data?.questoes;
 
-    async function getQuestion() {
-        const response = await fetch(`${url}/questions`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                year: 1,
-                index: 1,
-            }),
-        });
-        const result = await response.json();
-        setData(result);
-        console.log('data:', result);
+    if (!questoes || questoes.length === 0) {
+        return (
+            <>
+                <Tittle page='Question'/>
+                <div>Nenhuma questão encontrada.</div>
+            </>
+        );
     }
 
     return (
-        <>  
-            <Tittle page="Question"/>
-            <button onClick={getQuestion}>Buscar Questão</button>
-            <div>
-                
-                {data
-                    ? <p className='questions.pergunta' key={data.id}>{data.pergunta}</p>
-                    : 'Loading...'}
-            </div>  
+        <>
+            <Tittle page='Question'/>
+            <h2 className='window'>{`Ano - ${ano?.ano}`}</h2>
+            <div className="question-container window">
+                {questoes.map((questao: any) => (
+                    <div key={questao.id} className="questao-bloco">
+                        <h3>Questão {questao.id}</h3>
+                        <p>{questao.pergunta}</p>
+                        {questao.texto_auxiliar && (
+                            <div>
+                                <strong>Texto Auxiliar:</strong>
+                                <p>{questao.texto_auxiliar}</p>
+                            </div>
+                        )}
+                        {questao.imagem_auxiliar && (
+                            <div>
+                                <img src={questao.imagem_auxiliar} alt="Imagem auxiliar" />
+                            </div>
+                        )}
+                        <h4>Alternativas:</h4>
+                        <ul>
+                            {questao.alternativas?.map((alt: any) => (
+                                <li key={alt.id}>
+                                    <strong>{alt.letra}:</strong> {alt.texto}
+                                    {alt.imagem_auxiliar && (
+                                        <div>
+                                            <img src={alt.imagem_auxiliar} alt={`Imagem alternativa ${alt.letra}`} />
+                                        </div>
+                                    )}
+                                </li>
+                            ))}
+                        </ul>
+                        <hr />
+                    </div>
+                ))}
+            </div>
         </>
     );
 }

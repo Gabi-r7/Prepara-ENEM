@@ -17,9 +17,23 @@ routes.post('/login', (req, res) => {
 });
 
 //questoes
-// routes.post('/questions', (req, res) => {
-//     const {filters} = req.body;
-// });
+routes.post('/questions', async (req:any, res:any) => {
+    const { year } = req.body;
+
+    const ano = await prisma.ano.findFirst({
+        where: { ano: String(year) },
+        select: { id: true, ano: true }
+    });
+
+    if (!ano) return res.status(404).json({ error: 'Ano não encontrado' });
+
+    const questoes = await prisma.questao.findMany({
+        where: { ano_id: ano.id },
+        include: { alternativas: true }
+    });
+
+    res.json({ ano, questoes });
+});
 
 //redacao
 routes.post('/essay/send-essay', async (req, res) => {
@@ -33,36 +47,6 @@ routes.post('/essay/send-essay', async (req, res) => {
 // Rota teste para verificar se o Prisma está funcionando
 routes.get('/test', async (req, res) => {
     res.send(await prisma.usuario.findMany());
-});
-
-// Rota para pegar uma questao
-routes.post('/questions', async (req:any, res:any) => {
-    const { year, index } = req.body;
-
-    try {
-        const questao = await prisma.questao.findUnique({
-            where: {
-                ano_id: Number(year),
-                id: Number(index)
-            },
-            include: {
-                alternativas: true,
-                files: true,
-                disciplinas: {
-                    include: { disciplina: true }
-                }
-            }
-        });
-
-        if (!questao) {
-            return res.status(404).json({ error: 'Questão não encontrada' });
-        }
-
-        res.json(questao);
-        // console.log('questao:', questao);
-    } catch (error) {
-        res.status(500).json({ error: 'Erro ao buscar questão', details: error });
-    }
 });
 
 export default routes;
