@@ -17,5 +17,6 @@
     "@prisma/client": "^6.7.0",
     "marked": "^15.0.11",
     "ts-node": "^10.9.2"
-  }
+  },
+  "type": "module"
 }
