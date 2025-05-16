@@ -43,24 +43,31 @@ model Redacao {
 model Resposta {
   id                     Int       @id @default(autoincrement())
   data                   DateTime
-  id_alternativa_correta Int
+  id_alternativa_marcada Int
   usuario                Usuario   @relation(fields: [usuario_id], references: [id])
   usuario_id             Int
   questoes               Questao[]
+}
 
+model Ano {
+  id       Int      @id @default(autoincrement())
+  ano      String
+  questoes Questao[]
 }
 
 model Questao {
   id             Int         @id @default(autoincrement())
   texto_auxiliar String?
   pergunta        String
-  respostas       Resposta  @relation(fields: [respostas_id], references: [id])
-  respostas_id    Int
+  respostas       Resposta?  @relation(fields: [respostas_id], references: [id])
+  respostas_id    Int?
   imagem_auxiliar String?
   alternativas    Alternativa[]
   disciplinas     Questoes_has_Disciplina[]
   comentarios     Comentario[]
-
+  files           Files[]
+  ano             Ano       @relation(fields: [ano_id], references: [id])
+  ano_id         Int
 }
 
 model Comentario {
@@ -84,7 +91,7 @@ model Disciplina {
 
 model Questoes_has_Disciplina {
   questoes_id           Int
-  questoes_respostas_id Int
+  // questoes_respostas_id Int
   disciplina_id         Int
 
   questao     Questao     @relation(fields: [questoes_id], references: [id])
@@ -100,4 +107,12 @@ model Alternativa {
   questoes_id Int
   imagem_auxiliar String?
   questao     Questao @relation(fields: [questoes_id], references: [id])
+  e_correta   Boolean @default(false)
+}
+
+model Files {
+  id          Int     @id @default(autoincrement())
+  file_path   String
+  question_id Int
+  question    Questao @relation(fields: [question_id], references: [id])
 }
