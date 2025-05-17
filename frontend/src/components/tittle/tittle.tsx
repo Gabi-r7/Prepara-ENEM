@@ -19,7 +19,7 @@ const TrasnlatePages = {
     Essay: 'Redação',
 }
 
-function Tittle({ page, acessory, acessoryName }: TittleProps) {
+function Tittle({ page, acessory}: TittleProps) {
     const IconComponent = icons[page] || icons.Help;
     return (
         <>
@@ -30,7 +30,7 @@ function Tittle({ page, acessory, acessoryName }: TittleProps) {
                     </span>
                     {String(TrasnlatePages[page])}
                 </h1>
-                <div className={`tittle-acessory-component${acessoryName ? ' ' + acessoryName : ''}`}>
+                <div className='acessory-component'>
                     {acessory}
                 </div>
             </div>

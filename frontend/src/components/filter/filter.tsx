@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Link , useNavigate} from 'react-router-dom'
+import {    useNavigate} from 'react-router-dom'
 import './filter.css';
 import Tittle from '../tittle/tittle';
 import Tag from '../tag/tag';
@@ -42,7 +42,7 @@ function Filter() {
         });
         const data = await response.json();
 
-        navigate('/question', { state: { data } });
+        navigate('/question', { state: { data, exibition: selectedFilters['filter-exibition'], template: selectedFilters['filter-template'] } });
     }
 
     function handleSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
@@ -92,9 +92,20 @@ function Filter() {
         }));
     }
 
+    const handleStart = () => {
+        getQuestion();
+        window.scrollTo(0, 0); // Rola para o topo da página
+    };
+
     return (
         <>
-            <Tittle page='Filter'/>
+            <Tittle page='Filter' acessory={
+                <>
+                    <div className='filter-start-btn'>
+                        <button onClick={handleStart}>Começar</button>
+                    </div>
+                </>
+            }/>
             {(() => {
                 const [showInfo, setShowInfo] = React.useState(true);
                 const [openInfo, setOpenInfo] = React.useState(true);
@@ -206,7 +217,7 @@ function Filter() {
                 </>
             )}
             <div className='filter-start-btn'>
-                <button onClick={getQuestion}>Começar</button>
+                <button onClick={handleStart}>Começar</button>
             </div>
         </>
     );
