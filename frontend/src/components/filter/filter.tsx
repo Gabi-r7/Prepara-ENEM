@@ -7,7 +7,14 @@ import {Link} from 'react-router-dom'
 
 function Filter() {
 
-    const [selectedFilters, setSelectedFilters] = useState({
+    const [selectedFilters, setSelectedFilters] = useState<{
+        'filter-template': string;
+        'filter-exibition': string;
+        'filter-subject': string[];
+        'filter-year': string[];
+        'filter-order': string;
+        'filter-remove': string;
+    }>({
         'filter-template': '',
         'filter-exibition': '',
         'filter-subject': [],
@@ -95,6 +102,25 @@ function Filter() {
     
         setSelectedFilters((prevState) => {
             const selectedValue = filters.find(filter => filter.id === id)?.options.find(option => option.value === value)?.value || '';
+            
+            if (id === 'filter-year') {
+                // Se "Todos" for selecionado, substitui todas as outras tags
+                if (selectedValue === '0') {
+                    return {
+                        ...prevState,
+                         [id]: ['0'],// Apenas "Todos" permanece
+                    };
+                }
+
+                // Se outra tag for selecionada enquanto "Todos" está presente, remove "Todos"
+                if (Array.isArray(prevState[id]) && prevState[id].includes('0')) {
+                    return {
+                        ...prevState,
+                        [id]: selectedValue === '0' ? ['0'] : [selectedValue], // Mantém apenas "Todos" ou o novo valor
+                    };
+                }
+            }
+
             return {
                 ...prevState,
                 [id]: Array.isArray(prevState[id]) ? [...(prevState[id] as string[]), selectedValue] : selectedValue,

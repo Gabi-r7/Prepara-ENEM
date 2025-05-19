@@ -5,6 +5,8 @@ import icons from '../utils/icons';
 
 function Navbar() {
   const [isNavHidden, setIsNavHidden] = useState(false);
+  const [isNavMinimal, setIsNavMinimal] = useState(false);
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
   const logo = {
     name: 'logo',
@@ -13,7 +15,7 @@ function Navbar() {
   }
 
   const navItems = [
-    { path: '/', text: 'Inicio', icon: icons.Home , id: 'home'},
+    { path: '/home', text: 'Inicio', icon: icons.Home , id: 'home'},
     { path: '/ranking', text: 'Ranking', icon: icons.Ranking , id: 'ranking'},
     { path: '/filter', text: 'Questões', icon: icons.Filter , id: 'questions'},
     { path: '/essay', text: 'Redações', icon: icons.Essay , id: 'essay'},
@@ -22,31 +24,55 @@ function Navbar() {
   ];
 
   const handleHiddenMenu = () => {
-    setIsNavHidden((prev) => !prev);
+    if (isNavMinimal) {
+      setIsMobileNavOpen((prev) => !prev);
+    } else {
+      setIsNavHidden((prev) => !prev);
+    }
+  };
+
+  const handleLinkClick = () => {
+      setIsMobileNavOpen(false);
+  };
+
+  const getNavClass = () => {
+    if (isMobileNavOpen) return 'open-mobile-navbar';
+    if (isNavMinimal) return 'minimal-navbar';
+    if (isNavHidden) return 'hidden-navbar';
+    return ''; // Classe padrão
   };
 
   useEffect(() => {
-    const handleResize = () => {
+    const handleResizeNav = () => {
       const windowWidth = window.innerWidth;
-      const threshold = window.screen.width * 0.6; // 70% do tamanho da tela
-      setIsNavHidden(windowWidth < threshold);
+      const threshold = window.screen.width * 0.6;
+      const minimalWidth = window.screen.width * 0.4;
+
+      setIsNavMinimal(windowWidth <= minimalWidth);
+
+      if (windowWidth <= minimalWidth) {
+        setIsNavHidden(false);
+      } else {
+        setIsNavHidden(windowWidth < threshold);
+      }
+
+      // Remove a classe open-mobile-navbar se a tela for maior que 40%
+      if (windowWidth > minimalWidth) {
+        setIsMobileNavOpen(false);
+      }
     };
 
-    // Adiciona o evento de resize
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResizeNav);
+    handleResizeNav();
 
-    // Chama a função uma vez para verificar o estado inicial
-    handleResize();
-
-    // Remove o evento ao desmontar o componente
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', handleResizeNav);
     };
   }, []);
 
   return (
     <>
-      <nav className={isNavHidden ? 'hidden-navbar' : ''}>
+      <nav className={getNavClass()}>
         <div className="window navbar">
           <div id="logo">
             <Link to="/">
@@ -55,7 +81,13 @@ function Navbar() {
           </div>
           <div id="links">
           {navItems.map((item) => (
-            <Link to={item.path} id={`${item.id}-link`} className="link" key={item.id}>
+            <Link
+                to={item.path}
+                id={`${item.id}-link`}
+                className="link"
+                key={item.id}
+                onClick={handleLinkClick}
+              >
               <span className="nav-icon">{item.icon && <item.icon />}</span>
               <span className="text-link">{item.text}</span>
             </Link>
