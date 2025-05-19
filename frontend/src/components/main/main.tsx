@@ -11,6 +11,8 @@ import Essay from '../essay/essay'
 import Footer from '../footer/footer'
 import Question from '../question/question'
 import Profile from '../profile/profile'
+import SignUp from  '../signUp/signUp'
+import Introduction from '../introduction/introduction'
 
 function App() {
   const location = useLocation(); // Hook para obter a URL atual
@@ -24,7 +26,7 @@ function App() {
         {!isIntroductionPage && <Navbar />}
         <div className="main-content">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Introduction />} />
             <Route path="/home" element={<Home />} />
             <Route path="/ranking" element={<Ranking />} />
             <Route path="/filter" element={<Filter />} />
@@ -32,6 +34,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/Question" element={<Question />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/signUp" element={<SignUp />} />
           </Routes>
           <Footer />
         </div>

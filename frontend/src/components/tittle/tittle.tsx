@@ -15,6 +15,7 @@ const TrasnlatePages = {
     Filter: 'Filtro',
     Ranking: 'Ranking',
     Essay: 'Redação',
+    SignUp: 'Cadastro'
 }
 
 function Tittle({ page }: TittleProps) {
