@@ -24,3 +24,69 @@ select{
     background-color: var(--input-background-color);
 }
 
+/* filter-info */
+
+.filter-info{
+    display: flex;
+    flex-direction: column;
+    padding: var(--main-padding);
+}
+
+
+.filter-info > .filter-info-header{
+    display: flex;
+    gap: 0.5rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.filter-info > .filter-info-header > h2{
+    margin: 0;
+}
+
+.filter-info > .filter-info-header > button{
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    background-color: #192633;
+}
+
+.filter-info > .filter-info-header > button:hover{
+    background-color: white;
+    color: black;
+    transition: 0.2s;
+}
+
+.filter-info > .filter-info-header > button:active{
+    transform: scale(0.90);
+}
+
+.filter-info-open{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.filter-info-text {
+    height: 0;
+    transition: height 0.3s;
+}
+
+.filter-info-text {
+    height: 0;
+    margin: 0;
+    opacity: 0;
+    transition: height var(--main-transition), opacity 0s;
+}
+
+.filter-info.filter-info-open .filter-info-text {
+    height: auto;
+    opacity: 1;
+    transition: height var(--main-transition), opacity var(--main-transition);
+}
+
+.filter-info-open {
+    gap: 1rem;
+}

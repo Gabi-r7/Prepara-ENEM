@@ -8,6 +8,8 @@ import { GrCheckboxSelected } from "react-icons/gr";
 import { FaCheck } from "react-icons/fa";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
+import { FaCut } from "react-icons/fa";
+import { FaArrowUp } from "react-icons/fa";
 
 const icons = {
     Filter: FaFilter,
@@ -23,6 +25,8 @@ const icons = {
     Checked: FaCheck,
     DoubleArrowRight: MdKeyboardDoubleArrowRight,
     DoubleArrowLeft: MdKeyboardDoubleArrowLeft,
+    Cut: FaCut,
+    ArrowUp: FaArrowUp,
     SignUp: MdKeyboardDoubleArrowLeft
 };
 
