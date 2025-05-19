@@ -2,6 +2,8 @@ import { useState } from 'react';
 import './login.css';
 import url from '../../url';
 import Tittle from '../tittle/tittle';
+import icons from '../utils/icons';
+import { Link } from 'react-router-dom';
 
 function Login() {
     const [email, setEmail] = useState('');
@@ -9,58 +11,31 @@ function Login() {
   
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
-    
-        console.log('Email:', email);
-        console.log('Password:', password);
-    
-        try {
-            const response = await fetch(url + '/login', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, password }),
-            });
-    
-            if (response.status === 200) {
-              const data = await response.json();
-              console.log('Login successful:', data);
-            } else {
-              console.log('Login failed');
-            }
-        } catch (error) {
-          console.log('Error during login:', error);
-        }
+        
     };
 
     return (
       <>
-        <Tittle page="Login"/>
-        <div className="login-container">
-          <form onSubmit={handleLogin}>
-            <div className="form-group">
-              <label htmlFor="email">Email:</label>
-              <input
-                type="email"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
+         <div className='signUp-container'> 
+                <div className='signUp-content'>
+                    <Tittle page="Login"/>
+                    <div id='credenciais'className='window'>
+                        <div id='cad-login'>
+                            <icons.Profile/>
+                            <input type="text" placeholder='Digite seu Login' />
+                        </div>
+
+                        <div id='cad-password'>
+                            <icons.Lock/>
+                            <input type="text" placeholder='Digite sua senha'/>
+                        </div>
+                    </div>
+                    <div id='login-redirect' className='window'>
+                        <Link to="/login"><p>Já possui uma conta? </p><p id='login-link'>Faça login aqui</p></Link>
+                    </div>
+                </div>
             </div>
-            <div className="form-group">
-              <label htmlFor="password">Password:</label>
-              <input
-                type="password"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </div>
-            <button type="submit">Login</button>
-          </form>
-        </div>
+           
       </>
       );
 }

@@ -17,6 +17,10 @@
     background-color: var(--color-profile);
 }
 
+.tittle-SignUp, .tittle-Login{
+    background-color: var(--color-sign);
+}
+
 .tittle{
     color: black;
     border-radius: var(--main-border-radius);
@@ -119,4 +123,12 @@ h1{
 .filter-start-btn button:active {
     background: #174ea6;
     transform: scale(0.98);
+}
+
+/* Pagina cadastro */
+
+.tittle-SignUp, .tittle-Login{
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
