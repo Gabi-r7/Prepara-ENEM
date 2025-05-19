@@ -1,9 +1,9 @@
-import express from 'express';
+import express, { Request, Response, Router } from 'express';
 const { processEssay } = require('./scriptGemini.mjs');
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
-const routes = express.Router();
+const routes: Router = express.Router();
 
 //logi
 routes.post('/login', (req, res) => {
@@ -17,8 +17,30 @@ routes.post('/login', (req, res) => {
 });
 
 //questoes
-routes.post('/questions', (req, res) => {
-    const {filters} = req.body;
+routes.post('/questions', async (req: any, res: any) => {
+    const { year } = req.body;
+
+    const ano = await prisma.ano.findFirst({
+        where: { ano: String(year) },
+        select: { id: true, ano: true }
+    });
+
+    if (!ano) return res.status(404).json({ error: 'Ano não encontrado' });
+
+    const questoes = await prisma.questao.findMany({
+        where: { ano_id: ano.id },
+        include: {
+            alternativas: true,
+            files: true,
+            disciplinas: {
+                include: {
+                    disciplina: true
+                }
+            }
+        }
+    });
+
+    res.json({ ano, questoes });
 });
 
 //redacao

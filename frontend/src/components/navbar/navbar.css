@@ -24,7 +24,7 @@ nav .navbar {
     overflow: hidden;
     opacity: 1;
     justify-content: space-between;
-    transition: width var(--main-trasition);
+    transition: width var(--main-transition);
 }
 
 /* nav-itens */
@@ -121,7 +121,7 @@ nav .navbar {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.411);
-    transition: var(--main-trasition) 0.05s;
+    transition: var(--main-transition) 0.05s;
     padding-right: calc(var(--hidde-menu-bt-width) + 1rem);
 }
 
@@ -159,7 +159,7 @@ nav .navbar {
     padding: 0;
     height: 100%;
     background-color: rgba(0, 0, 0, 0);
-    transition: var(--main-trasition);
+    transition: var(--main-transition);
     padding-right: calc(var(--hidde-menu-bt-width) + 1rem);
     min-width: var(--hidde-menu-bt-width);
     position: fixed;
@@ -173,7 +173,7 @@ nav .navbar {
     width: 0;
     height: auto;
     padding: 0;
-    transition: var(--main-trasition); 
+    transition: var(--main-transition); 
 }
 
 .minimal-navbar #links {
@@ -184,7 +184,7 @@ nav .navbar {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    transition: var(--main-trasition);
+    transition: var(--main-transition);
 }
 
 .minimal-navbar #hidde-menu-bt{
@@ -198,12 +198,12 @@ nav .navbar {
 /* hidden-nav */
 
 .hidden-navbar{
-    transition: var(--main-trasition);
+    transition: var(--main-transition);
 }
 
 .hidden-navbar .navbar{
     width: calc(var(--main-padding)*2 + var(--icon-nav-width));
-    transition: var(--main-trasition);
+    transition: var(--main-transition);
     justify-content: center;
 }
 
@@ -214,5 +214,5 @@ nav .navbar {
 
 .hidden-navbar #hidde-menu-bt{
     /* right: 0rem; */
-    transition: var(--main-trasition) 0.05s;
+    transition: var(--main-transition) 0.05s;
 }

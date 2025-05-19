@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
+import {    useNavigate} from 'react-router-dom'
 import './filter.css';
 import Tittle from '../tittle/tittle';
 import Tag from '../tag/tag';
+import url from '../../url.ts';
+import filters from './filter.json';
 
-import {Link} from 'react-router-dom'
 
 function Filter() {
+    const navigate = useNavigate();
 
     const [selectedFilters, setSelectedFilters] = useState<{
         'filter-template': string;
@@ -23,79 +26,24 @@ function Filter() {
         'filter-remove': '',
     });
 
-    const filters = [
-        {
-            id: 'filter-template',
-            label: 'Gabarito',
-            options: [
-                { value: '', text: 'Escolha uma opção', disabled: true, hidden: true},
-                { value: '1', text: 'Ao responder todas as questões' },
-                { value: '2', text: 'Ao responder uma questão' },
-            ],
-        },
-        {
-            id: 'filter-exibition',
-            label: 'Forma de exibição',
-            options: [
-                { value: '', text: 'Escolha uma opção', disabled: true, hidden: true},
-                { value: '1', text: 'Questões em cascata' },
-                { value: '2', text: 'Questão por página' },
-            ],
-        },
-        {
-            id: 'filter-subject',
-            label: 'Disciplina',
-            options: [
-                { value: '', text: 'Escolha uma opção', disabled: true, hidden: true},
-                { value: '1', text: 'Ciências humanas' },
-                { value: '2', text: 'Ciências da natureza' },
-                { value: '3', text: 'Linguagens' },
-                { value: '4', text: 'Matemática' },
-            ],
-        },
-        {
-            id: 'filter-year',
-            label: 'Ano',
-            options: [
-                { value: '', text: 'Escolha uma opção', disabled: true, hidden: true},
-                {text: 'Todos', value: '0'},
-                {text: '2009', value: '2009'},
-                {text: '2010', value: '2010'},
-                {text: '2011', value: '2011'},
-                {text: '2012', value: '2012'},
-                {text: '2013', value: '2013'},
-                {text: '2014', value: '2014'},
-                {text: '2015', value: '2015'},
-                {text: '2016', value: '2016'},
-                {text: '2017', value: '2017'},
-                {text: '2018', value: '2018'},
-                {text: '2019', value: '2019'},
-                {text: '2020', value: '2020'},
-                {text: '2021', value: '2021'},
-                {text: '2022', value: '2022'},
-                {text: '2023', value: '2023'},
-            ],
-        },
-        {
-            id: 'filter-order',
-            label: 'Ordenar',
-            options: [
-                { value: '', text: 'Escolha uma opção', disabled: true, hidden: true},
-                { value: '1', text: 'Mais novas' },
-                { value: '2', text: 'Mais antigas' },
-                { value: '3', text: 'Aleatório' },
-            ],
-        },
-        {
-            id: 'filter-remove',
-            label: 'Remover',
-            options: [
-                { value: '', text: 'Escolha uma opção', disabled: true, hidden: true},
-                { value: '1', text: 'Remover questões já respondidas' },
-                { value: 'none', text: 'Nada' },
-            ],
-        },
-    ];
+    async function getQuestion() {
+        const year = selectedFilters['filter-year'][0] ? Number(selectedFilters['filter-year'][0]) : null;
+        const index = 1;
+
+        const response = await fetch(`${url}/questions`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                year: year,
+                index: index,
+            }),
+        });
+        const data = await response.json();
+
+        navigate('/question', { state: { data, exibition: selectedFilters['filter-exibition'], template: selectedFilters['filter-template'] } });
+    }
 
     function handleSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
         const { id, value } = event.target as { id: keyof typeof selectedFilters; value: string };
@@ -123,7 +71,14 @@ function Filter() {
 
             return {
                 ...prevState,
-                [id]: Array.isArray(prevState[id]) ? [...(prevState[id] as string[]), selectedValue] : selectedValue,
+                [id]: Array.isArray(prevState[id])
+                    ? (
+                        // Adiciona apenas se não existir ainda
+                        (prevState[id] as string[]).includes(selectedValue) || selectedValue === ''
+                            ? prevState[id]
+                            : [...(prevState[id] as string[]), selectedValue]
+                    )
+                    : selectedValue,
             };
         });
     }
@@ -137,10 +92,54 @@ function Filter() {
         }));
     }
 
+    const handleStart = () => {
+        getQuestion();
+        window.scrollTo(0, 0); // Rola para o topo da página
+    };
+
     return (
         <>
-            <Tittle page="Filter" />
+            <Tittle page='Filter' acessory={
+                <>
+                    <div className='filter-start-btn'>
+                        <button onClick={handleStart}>Começar</button>
+                    </div>
+                </>
+            }/>
+            {(() => {
+                const [showInfo, setShowInfo] = React.useState(true);
+                const [openInfo, setOpenInfo] = React.useState(true);
 
+                React.useEffect(() => {
+                    const timer = setTimeout(() => setOpenInfo(false), 10000);
+                    return () => clearTimeout(timer);
+                }, []);
+
+                if (!showInfo) return null;
+
+                return (
+                    <div className={`filter-info window${openInfo ? ' filter-info-open' : ''}`}>
+                        <div className='filter-info-header'>
+                            <h2>Informação - Instrução básica</h2>
+                            <button
+                                type="button"
+                                onClick={() => setOpenInfo((prev) => !prev)}
+                            >
+                                {openInfo ? 'Fechar info' : 'Abrir info'}
+                            </button>
+                        </div>
+                        <div className='filter-info-text'>
+                            <p>
+                                Para começar a usar o sistema, você deve selecionar os filtros desejados. 
+                                Você pode escolher entre diferentes opções de filtro, como ano, assunto e outros critérios relevantes. Além de um timer para escolher o tempo de duração da prova.
+                            </p>
+                            <p>
+                                Após fazer suas seleções, clique no botão "Começar" nofinal da pagina para iniciar a prova.
+                            </p>
+                        </div>
+                    </div>
+                );
+            })()}
             <div id="filter-container">
                 <div className="filter-container-select window">
                     {filters.map((filter) => {
@@ -153,8 +152,8 @@ function Filter() {
                                         className="filter-select"
                                         value={
                                             Array.isArray(selectedFilters[filter.id as keyof typeof selectedFilters])
-                                            ? '' // Define um valor padrão se for um array
-                                            : selectedFilters[filter.id as keyof typeof selectedFilters]
+                                                ? '' // Define um valor padrão se for um array
+                                                : selectedFilters[filter.id as keyof typeof selectedFilters]
                                         }
                                         onChange={handleSelectChange}
                                     >
@@ -188,7 +187,6 @@ function Filter() {
             }) && (
                 <>
                     <div className="filter-tags-container window">
-                    
                         {Object.entries(selectedFilters).map(([filterKey, selectedValue]) => {
                             if (Array.isArray(selectedValue) && selectedValue.length > 0) {
                                 return (
@@ -218,11 +216,9 @@ function Filter() {
                     </div>
                 </>
             )}
-            <div>
-                <Link to="/Question">Questões</Link> 
+            <div className='filter-start-btn'>
+                <button onClick={handleStart}>Começar</button>
             </div>
-
-
         </>
     );
 }

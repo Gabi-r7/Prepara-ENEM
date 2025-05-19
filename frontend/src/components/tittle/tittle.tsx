@@ -2,7 +2,9 @@ import './tittle.css';
 import icons from '../utils/icons';
 
 interface TittleProps {
-    page: keyof typeof icons;
+    page: keyof typeof TrasnlatePages;
+    acessory?: React.ReactNode;
+    acessoryName?: React.ReactNode;
 }
 
 const TrasnlatePages = {
@@ -18,9 +20,8 @@ const TrasnlatePages = {
     SignUp: 'Cadastro'
 }
 
-function Tittle({ page }: TittleProps) {
+function Tittle({ page, acessory}: TittleProps) {
     const IconComponent = icons[page] || icons.Help;
-
     return (
         <>
             <div className={`tittle tittle-${page}`}>
@@ -30,8 +31,8 @@ function Tittle({ page }: TittleProps) {
                     </span>
                     {String(TrasnlatePages[page])}
                 </h1>
-                <div className='tittle-extra-component'>
-
+                <div className='acessory-component'>
+                    {acessory}
                 </div>
             </div>
         </>

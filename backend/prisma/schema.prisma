@@ -43,24 +43,36 @@ model Redacao {
 model Resposta {
   id                     Int       @id @default(autoincrement())
   data                   DateTime
-  id_alternativa_correta Int
+  id_alternativa_marcada Int
   usuario                Usuario   @relation(fields: [usuario_id], references: [id])
   usuario_id             Int
   questoes               Questao[]
+}
 
+model Ano {
+  id       Int      @id @default(autoincrement())
+  ano      String
+  questoes Questao[]
 }
 
 model Questao {
-  id             Int         @id @default(autoincrement())
-  texto_auxiliar String?
-  pergunta        String
-  respostas       Resposta  @relation(fields: [respostas_id], references: [id])
-  respostas_id    Int
-  imagem_auxiliar String?
-  alternativas    Alternativa[]
-  disciplinas     Questoes_has_Disciplina[]
-  comentarios     Comentario[]
-
+  id                      Int           @id @default(autoincrement())
+  title                   String
+  index                   Int
+  discipline              String
+  language                String?
+  year                    Int
+  context                 String
+  alternativesIntroduction String
+  correctAlternative      String
+  alternativas            Alternativa[]
+  files                   File[]
+  ano                     Ano           @relation(fields: [ano_id], references: [id])
+  ano_id                  Int
+  respostas               Resposta?     @relation(fields: [respostas_id], references: [id])
+  respostas_id            Int?
+  comentarios             Comentario[]
+  disciplinas             Questoes_has_Disciplina[]
 }
 
 model Comentario {
@@ -84,7 +96,6 @@ model Disciplina {
 
 model Questoes_has_Disciplina {
   questoes_id           Int
-  questoes_respostas_id Int
   disciplina_id         Int
 
   questao     Questao     @relation(fields: [questoes_id], references: [id])
@@ -95,9 +106,17 @@ model Questoes_has_Disciplina {
 
 model Alternativa {
   id          Int     @id @default(autoincrement())
-  letra       String
-  texto       String
-  questoes_id Int
-  imagem_auxiliar String?
-  questao     Questao @relation(fields: [questoes_id], references: [id])
+  letter      String
+  text        String
+  file        String?
+  isCorrect   Boolean @default(false)
+  questao     Questao @relation(fields: [questao_id], references: [id])
+  questao_id  Int
+}
+
+model File {
+  id          Int     @id @default(autoincrement())
+  url         String
+  questao     Questao @relation(fields: [questao_id], references: [id])
+  questao_id  Int
 }

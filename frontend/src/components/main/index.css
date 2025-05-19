@@ -15,8 +15,8 @@
   --main-padding: 1rem;
   --main-border-radius: 20px;
   --secondary-border-radius: 0.5rem;
-  --main-trasition: 0.5s ease-in-out;
-  --fast-trasition: 0.2s ease-in-out;
+  --main-transition: 0.5s ease-in-out;
+  --fast-transition: 0.2s ease-in-out;
   
   /* navbar */
   
@@ -33,14 +33,15 @@
   --window-border-color: #32465b;
   --background-color: #21303e;
   --color-filter: #f5f5f5;
-  --color-essay: #41b9ff;
+  --color-essay: #41dfff;
   --color-ranking: #f1c40f;
   --color-home: rgb(166, 0, 255);
-  --color-question: #0400ff;
+  --color-question: rgb(22, 111, 255);
   --color-profile: #2ecc71;
   --color-filter-checkbox: #f1c40f;
   --color-filter-checkbox-selected: #12f33b;
   --input-background-color: #192633;
+  --color-acessory-bt-start: #f1c40f;
 
   /* icons */
   
