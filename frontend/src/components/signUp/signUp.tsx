@@ -8,7 +8,7 @@ function SignUp() {
             <div id='credenciais'>
                 <input type="text" placeholder='Digite seu Login' />
                 <input type="text" placeholder='Digite seu E-mail'/>
-                <input type="text" placeholder='Digite sua senha'/>,
+                <input type="text" placeholder='Digite sua senha'/>
                 <input type="text" placeholder='Confirme sua senha'/>
             </div>
 

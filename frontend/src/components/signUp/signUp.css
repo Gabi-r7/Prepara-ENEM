@@ -1,4 +1,8 @@
 #credenciais{
     display: flex;
-    flex-direction: collums;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: baseline;
 };
