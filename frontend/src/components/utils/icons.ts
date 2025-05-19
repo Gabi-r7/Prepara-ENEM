@@ -27,6 +27,7 @@ const icons = {
     DoubleArrowLeft: MdKeyboardDoubleArrowLeft,
     Cut: FaCut,
     ArrowUp: FaArrowUp,
+    SignUp: MdKeyboardDoubleArrowLeft
 };
 
 export default icons;
