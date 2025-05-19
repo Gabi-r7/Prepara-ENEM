@@ -71,12 +71,12 @@
     justify-content: center;
 }
 .scroll-to-top-btn:hover {
-    background: rgb(22, 111, 255);
+    background: var(--color-question);
     transform: scale(1.08);
 }
 
 .finish-btn {
-    background: #2563eb;
+    background: var(--color-question);
     color: #fff;
     border: none;
     border-radius: var(--main-border-radius);
