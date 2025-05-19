@@ -1,10 +1,11 @@
 import './questions.css'
 import Tittle from '../tittle/tittle';
 import { useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import Alternativa from '../alternative/alternative';
 import icons from '../utils/icons';
+import FooterQuestion from './footer-question';
 
 function Question() {
     const [page, setPage] = useState(0);
@@ -17,7 +18,9 @@ function Question() {
     const questoes = data?.questoes;
     const initialExibition = location.state?.exibition;
     const [exibition, setExibition] = useState(initialExibition);
-    const template = data?.template;
+    const template = location.state?.template;
+
+    const [showAnswerKey, setShowAnswerKey] = useState<{ [questionId: number]: boolean }>({});
 
     // Lista de respostas: { ano, questionId, alternativeId }
     const [selectedAnswers, setSelectedAnswers] = useState<
@@ -97,6 +100,13 @@ function Question() {
         }
     };
 
+    const toggleAnswerKey = (questionId: number) => {
+        setShowAnswerKey(prev => ({
+            ...prev,
+            [questionId]: !prev[questionId]
+    }));
+};
+
     return (
         <>
             <Tittle page='Question' acessory={
@@ -172,11 +182,7 @@ function Question() {
             {exibition == '1' && (
                 <div className="questions-container">
                     {questoes.map((question: any, idx: number) => (
-                        <div
-                            key={question.id}
-                            className="question window"
-                            id={`question-${idx}`}
-                        >
+                        <div key={question.id} className="question window" id={`question-${idx}`}>
                             <h2>{question.title}</h2>
                             <ReactMarkdown>{question.context}</ReactMarkdown>
                             {question.alternativesIntroduction && (
@@ -194,65 +200,108 @@ function Question() {
                                     />
                                 ))}
                             </ul>
+                            <button
+                                className="response-question"
+                                onClick={() => toggleAnswerKey(question.id)}
+                            >
+                                <p>Responder</p>
+                                <icons.Send />
+                            </button>
+                            {showAnswerKey[question.id] && (
+                                <div className="template-each-question" >
+                                    <strong>Gabarito:</strong>
+                                    <div>
+                                        {(() => {
+                                            const correctAlt = question.alternativas.find((alt: any) => alt.isCorrect);
+                                            const userAnswer = selectedAnswers.find(
+                                                (ans) => ans.questionId === question.id && ans.ano === ano?.ano
+                                            );
+                                            const userAlt = question.alternativas.find((alt: any) => alt.id === userAnswer?.alternativeId);
+                                            return (
+                                                <>
+                                                    <div className='template-correct-answer'>
+                                                        Correta: <span>
+                                                            {correctAlt ? `${correctAlt.letter} - ${correctAlt.text}` : 'Não definida'}
+                                                        </span>
+                                                    </div>
+                                                    <div className={`template-user-answer icorrect` + (userAlt && userAlt.id === correctAlt?.id ? ' correct' : '')}>
+                                                        Sua resposta: <span>
+                                                            {userAlt ? `${userAlt.letter} - ${userAlt.text}` : <em>Não respondida</em>}
+                                                        </span>
+                                                    </div>
+                                                </>
+                                            );
+                                        })()}
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     ))}
                 </div>
             )}
             {exibition == '2' && (
-                <>
-                    <div className="questions-container">
-                        <div key={questoes[page].id} className="question window">
-                            <h2>{questoes[page].title}</h2>
-                            <ReactMarkdown>{questoes[page].context}</ReactMarkdown>
-                            {questoes[page].alternativesIntroduction && (
-                                <p className='alternativeIntroduction'><strong>{questoes[page].alternativesIntroduction}</strong></p>
-                            )}
-                            <ul className="alternatives">
-                                {questoes[page].alternativas?.map((alt: any) => (
-                                    <Alternativa
-                                        key={alt.id}
-                                        alt={alt}
-                                        questionId={questoes[page].id}
-                                        selectedAlternativeId={getSelectedAlternativeId(questoes[page].id)}
-                                        onSelect={(alternativeId) => handleSelectAlternative(questoes[page].id, alternativeId)}
-                                        finished={finished}
-                                    />
-                                ))}
-                            </ul>
-                            <div className="navigation-buttons window">
-                                <button
-                                    onClick={() => setPage((prev) => Math.max(prev - 1, 0))}
-                                    disabled={page === 0}
-                                >
-                                    <icons.DoubleArrowLeft />
-                                    Anterior
-                                </button>
-                                <input
-                                    id='page-input-question'
-                                    type="text"
-                                    placeholder="N.º da questão"
-                                    value={inputValue}
-                                    onChange={e => {
-                                        const val = e.target.value;
-                                        setInputValue(val);
-                                        const num = Number(val);
-                                        if (!isNaN(num) && num >= 1 && num <= questoes.length) {
-                                            setPage(num - 1);
-                                        }
-                                    }}
-                                    onBlur={() => setInputValue(String(page + 1))}
+                <div className="questions-container">
+                    <div key={questoes[page].id} className="question window">
+                        <h2>{questoes[page].title}</h2>
+                        <ReactMarkdown>{questoes[page].context}</ReactMarkdown>
+                        {questoes[page].alternativesIntroduction && (
+                            <p className='alternativeIntroduction'><strong>{questoes[page].alternativesIntroduction}</strong></p>
+                        )}
+                        <ul className="alternatives">
+                            {questoes[page].alternativas?.map((alt: any) => (
+                                <Alternativa
+                                    key={alt.id}
+                                    alt={alt}
+                                    questionId={questoes[page].id}
+                                    selectedAlternativeId={getSelectedAlternativeId(questoes[page].id)}
+                                    onSelect={(alternativeId) => handleSelectAlternative(questoes[page].id, alternativeId)}
+                                    finished={finished}
                                 />
-                                <button
-                                    onClick={() => setPage((prev) => Math.min(prev + 1, questoes.length - 1))}
-                                    disabled={page === questoes.length - 1}
-                                >
-                                    Proxima
-                                    <icons.DoubleArrowRight />
-                                </button>
+                            ))}
+                        </ul>
+                        <FooterQuestion
+                            page={page}
+                            setPage={setPage}
+                            inputValue={inputValue}
+                            setInputValue={setInputValue}
+                            questoes={questoes}
+                            finished={finished}
+                            handleFinish={handleFinish}
+                            template={template}
+                            icons={icons}
+                            toggleAnswerKey={toggleAnswerKey}
+                            exibition={exibition}
+                        />
+                        {showAnswerKey[questoes[page].id] && (
+                            <div className="template-each-question">
+                                <strong>Gabarito:</strong>
+                                <div>
+                                    {(() => {
+                                        const correctAlt = questoes[page].alternativas.find((alt: any) => alt.isCorrect);
+                                        const userAnswer = selectedAnswers.find(
+                                            (ans) => ans.questionId === questoes[page].id && ans.ano === ano?.ano
+                                        );
+                                        const userAlt = questoes[page].alternativas.find((alt: any) => alt.id === userAnswer?.alternativeId);
+                                        return (
+                                            <>
+                                                <div className='template-correct-answer'>
+                                                    Correta: <span>
+                                                        {correctAlt ? `${correctAlt.letter} - ${correctAlt.text}` : 'Não definida'}
+                                                    </span>
+                                                </div>
+                                                <div className={`template-user-answer icorrect` + (userAlt && userAlt.id === correctAlt?.id ? ' correct' : '')}>
+                                                    Sua resposta: <span>
+                                                        {userAlt ? `${userAlt.letter} - ${userAlt.text}` : <em>Não respondida</em>}
+                                                    </span>
+                                                </div>
+                                            </>
+                                        );
+                                    })()}
+                                </div>
                             </div>
-                        </div>
+                        )}
                     </div>
-                </>
+                </div>
             )}
             <button
                 className="scroll-to-top-btn"
@@ -261,15 +310,7 @@ function Question() {
             >
                 <icons.ArrowUp />
             </button>
-            {!finished && (
-                <button
-                    className="finish-btn"
-                    onClick={handleFinish}
-                >
-                    Terminar
-                </button>
-            )}
-            {finished && (
+            {finished && template == '1' && (
                 <div className="results-list window">
                     <h2>Resultados</h2>
                     <ul>
@@ -297,6 +338,11 @@ function Question() {
                             );
                         })}
                     </ul>
+                </div>
+            )}
+            {finished && template == '2' && (
+                <div className="results-list window">
+                    <h2>Resultados</h2>
                 </div>
             )}
         </>

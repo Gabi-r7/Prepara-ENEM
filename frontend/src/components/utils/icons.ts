@@ -10,6 +10,7 @@ import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
 import { FaCut } from "react-icons/fa";
 import { FaArrowUp } from "react-icons/fa";
+import { IoSend } from "react-icons/io5";
 
 const icons = {
     Filter: FaFilter,
@@ -27,7 +28,8 @@ const icons = {
     DoubleArrowLeft: MdKeyboardDoubleArrowLeft,
     Cut: FaCut,
     ArrowUp: FaArrowUp,
-    SignUp: MdKeyboardDoubleArrowLeft
+    SignUp: MdKeyboardDoubleArrowLeft,
+    Send: IoSend,
 };
 
 export default icons;

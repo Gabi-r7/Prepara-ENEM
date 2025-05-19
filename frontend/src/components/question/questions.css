@@ -79,11 +79,94 @@
     background: var(--color-question);
     color: #fff;
     border: none;
-    border-radius: var(--main-border-radius);
+    border-radius: calc(var(--main-border-radius)/2);
     padding: var(--main-padding);
     font-size: 1.2rem;
     font-weight: bold;
     cursor: pointer;
     transition: background 0.2s, transform 0.1s;
     margin: 0;
+    border: 2px solid transparent;
+}
+.finish-btn:hover {
+    border: 2px solid white;
+}
+
+/* question footer */
+
+.question-footer{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    border-radius: calc(var(--main-border-radius)/2);
+}
+
+.response-question{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgb(45, 206, 39);
+    color: #fff;
+    border: none;
+    border-radius: calc(var(--main-border-radius)/2);
+    padding: var(--main-padding);
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    margin: 0;
+    border: 2px solid transparent;
+}
+.response-question > p{
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.response-question:hover {
+    border: 2px solid white;
+}
+
+.template-each-question {
+    margin-top: 2rem;
+    border-top: 1px solid white;
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.template-each-question > div{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.template-correct-answer{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border: 2px solid rgb(45, 206, 39);
+    color: #fff;
+    border-radius: calc(var(--main-border-radius)/2);
+    padding: var(--main-padding);
+    transition: background 0.2s, transform 0.1s;
+    margin: 0;
+}
+
+.template-user-answer{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border: 2px solid rgb(255, 0, 0);
+    color: #fff;
+    border-radius: calc(var(--main-border-radius)/2);
+    padding: var(--main-padding);
+    transition: background 0.2s, transform 0.1s;
+    margin: 0;
+}
+
+.template-user-answer.correct{
+    border: none;
 }

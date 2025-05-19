@@ -19,7 +19,14 @@
     background-color: var(--input-background-color);
     border-radius: calc(var(--main-border-radius)/2);
     gap: 1rem;
+    border: 2px solid transparent;
+    cursor: pointer;
 }
+
+.alternative:hover > label{
+    border: 2px solid white;
+}
+
 
 .letter-container{
     border-radius: 100px;
